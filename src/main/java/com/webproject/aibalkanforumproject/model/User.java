@@ -7,6 +7,7 @@ import java.util.List;
 //Made by Edvin Lekovic
 @Data
 @Entity
+@Table(name = "Ai_users")
 public class User {
 
     @Id
