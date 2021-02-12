@@ -7,10 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
-
+//Made by Filip Stavrov
 @Data
 @Entity
-
 public class Event {
 
     @Id
@@ -28,10 +27,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(String title, String addressOrUrl, LocalDateTime date, String hostedBy) {
+    public Event(String title, String addressOrUrl,String hostedBy) {
         this.title = title;
         this.addressOrUrl = addressOrUrl;
-        this.date = date;
+        this.date = LocalDateTime.now();
         HostedBy = hostedBy;
     }
 }
