@@ -1,15 +1,17 @@
 package com.webproject.aibalkanforumproject.model;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 //Made by Edvin Lekovic
 @Data
 @Entity
 @Table(name = "Ai_users")
-public class User {
-
+public class User  {
     @Id
     String username;
 
@@ -35,4 +37,5 @@ public class User {
         this.lastname = lastname;
         this.password = password;
     }
+
 }

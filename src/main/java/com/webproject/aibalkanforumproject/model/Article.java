@@ -22,6 +22,8 @@ public class Article {
 
     LocalDateTime dateCreated;
 
+    LocalDateTime lastChangeDate;
+
     @ManyToOne
     User user;
 
@@ -34,5 +36,6 @@ public class Article {
         this.category = category;
         this.user = user;
         this.dateCreated = LocalDateTime.now();
+        this.lastChangeDate = LocalDateTime.now();
     }
 }
