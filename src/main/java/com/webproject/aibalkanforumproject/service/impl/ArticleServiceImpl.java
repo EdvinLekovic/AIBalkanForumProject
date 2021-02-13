@@ -37,7 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> findByUser(String username) {
-        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserNotExistException(username));
+        User user = this.userRepository.findById(username).orElseThrow(() -> new UserNotExistException(username));
         return articleRepository.findArticlesByUser(user);
     }
 

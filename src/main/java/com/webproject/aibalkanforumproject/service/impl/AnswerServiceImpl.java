@@ -55,7 +55,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public List<Answer> searchAnswersByUser(String username) {
 
-        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserNotExistException(username));
+        User user = this.userRepository.findById(username).orElseThrow(() -> new UserNotExistException(username));
         if(user == null){
             return Collections.emptyList();
         }
