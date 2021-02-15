@@ -13,6 +13,7 @@ import com.webproject.aibalkanforumproject.repository.UserRepository;
 import com.webproject.aibalkanforumproject.service.AnswerService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,7 +60,8 @@ public class AnswerServiceImpl implements AnswerService {
         if(user == null){
             return Collections.emptyList();
         }
-        return this.answerRepository.findAnswersByUser(user);
+        //return this.answerRepository.findAnswersByUser(user);
+        return new ArrayList<>();
     }
 
     @Override

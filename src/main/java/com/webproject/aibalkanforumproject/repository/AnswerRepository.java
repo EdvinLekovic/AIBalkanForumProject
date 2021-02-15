@@ -14,7 +14,7 @@ import java.util.List;
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     List<Answer> findAllByDescriptionContaining(String keyWord);
-    List<Answer> findAnswersByUser(User user);
+    //List<Answer> findAnswersByUser(User user);
     List<Answer> findAllByQuestion(Question question);
 
 }

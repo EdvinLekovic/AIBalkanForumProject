@@ -14,7 +14,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findAllByTitleLike(String title);
     List<Question> findAllByDescriptionContaining(String keyWord);
-    List<Question> findQuestionsByUser(User user);
+    //List<Question> findQuestionByUser(User user);
 
 
 }

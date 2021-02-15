@@ -14,6 +14,7 @@ import com.webproject.aibalkanforumproject.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -69,6 +70,7 @@ public class QuestionServiceImpl implements QuestionService {
         if (user == null){
             return Collections.emptyList();
         }
-        return this.questionRepository.findQuestionsByUser(user);
+        //return this.questionRepository.findQuestionsByUser(user);
+        return new ArrayList<>();
     }
 }
