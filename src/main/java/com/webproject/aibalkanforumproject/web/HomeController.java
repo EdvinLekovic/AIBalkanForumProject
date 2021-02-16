@@ -1,13 +1,15 @@
 package com.webproject.aibalkanforumproject.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller("/home")
+@Controller("/")
 public class HomeController {
 
-    @GetMapping("/")
-    String getHomePage(){
+    @GetMapping("home")
+    public String getHomePage(Model model) {
+        model.addAttribute("bodyContent", "home");
         return "master-template";
     }
 }
