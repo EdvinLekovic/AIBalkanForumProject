@@ -1,14 +1,17 @@
-<th:block xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block>
     <div class="container">
         <form class="form-signin mt-xl-5" method="post" action="/login">
             <h6 class="form-signin-heading">Enter your username and password</h6>
             <p>
                 <label for="username" class="sr-only">Username</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
+                       autofocus="">
             </p>
             <p>
                 <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                       required="">
             </p>
 
             <div th:if="${hasError}">
@@ -20,8 +23,11 @@
 
             <button class="btn btn-lg btn-dark btn-outline-light btn-block" type="submit">Sign in</button>
         </form>
-        <h8>You don't have an account?</h8><br/>
-        <h8>You can register for free by clicking the button bellow</h8><br/>
+        <h8>You don't have an account?</h8>
+        <br/>
+        <h8>You can register for free by clicking the button bellow</h8>
+        <br/>
         <a href="/register" class="btn btn-light btn-outline-dark">Register here</a>
     </div>
 </th:block>
+</html>
