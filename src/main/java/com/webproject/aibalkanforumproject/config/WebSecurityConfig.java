@@ -28,10 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/assets/**", "/register", "/forum", "/api/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
@@ -50,8 +48,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(customUsernamePasswordAuthenticationProvider);
+        //Admin
+        auth.inMemoryAuthentication()
+                .withUser("edvin12")
+                .password(passwordEncoder.encode("edvin"))
+                .authorities("ROLE_ADMIN")
+                .and()
+                .withUser("filip12")
+                .password(passwordEncoder.encode("filip"))
+                .authorities("ROLE_ADMIN");
     }
 
 }
