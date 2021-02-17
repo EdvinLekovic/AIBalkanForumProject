@@ -67,10 +67,6 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Question> searchQuestionsByUser(String username) {
         User user = this.userRepository.findById(username).orElseThrow(() -> new UserNotExistException(username));
-        if (user == null){
-            return Collections.emptyList();
-        }
-        //return this.questionRepository.findQuestionsByUser(user);
-        return new ArrayList<>();
+        return this.questionRepository.findQuestionsByUser(user);
     }
 }

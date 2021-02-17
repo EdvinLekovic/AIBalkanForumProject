@@ -7,7 +7,6 @@ import com.webproject.aibalkanforumproject.service.EventService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 //Made by Filip Stavrov
@@ -37,14 +36,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> findEventsByHost(String hostedBy) {
-        //return this.eventRepository.findByHostedBy(hostedBy);
-        return new ArrayList<>();
+    public List<Event> findEventsByHost(String host) {
+        return this.eventRepository.findAllByHost(host);
     }
 
     @Override
     public List<Event> findEventsByDate(LocalDateTime date) {
-        //return this.eventRepository.findByDate(date);
-        return new ArrayList<>();
+        return this.eventRepository.findAllByDate(date);
     }
 }

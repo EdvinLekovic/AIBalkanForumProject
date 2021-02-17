@@ -23,6 +23,12 @@ public class User implements UserDetails {
 
     String password;
 
+    @OneToMany(mappedBy = "user")
+    List<Question> questions;
+
+    @OneToMany(mappedBy = "user")
+    List<Answer> answers;
+
     private boolean isAccountNonExpired = true;
 
     private boolean isAccountNonLocked = true;

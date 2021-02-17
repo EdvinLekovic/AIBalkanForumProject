@@ -18,6 +18,9 @@ public class Question {
 
     String description;
 
+    @ManyToOne
+    User user;
+
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     List<Answer> answers;
 

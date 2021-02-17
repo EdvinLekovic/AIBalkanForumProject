@@ -22,15 +22,15 @@ public class Event {
 
     LocalDateTime date;
 
-    String HostedBy;
+    String host;
 
     public Event() {
     }
 
-    public Event(String title, String addressOrUrl,String hostedBy) {
+    public Event(String title, String addressOrUrl,String host) {
         this.title = title;
         this.addressOrUrl = addressOrUrl;
         this.date = LocalDateTime.now();
-        HostedBy = hostedBy;
+        this.host = host;
     }
 }

@@ -11,6 +11,6 @@ public interface EventService {
 
     Event create(String title, String addressOrUrl, String hostedBy);
     Event delete(Long id);
-    List<Event> findEventsByHost(String hostedBy);
+    List<Event> findEventsByHost(String host);
     List<Event> findEventsByDate(LocalDateTime date);
 }

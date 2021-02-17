@@ -18,6 +18,9 @@ public class Answer {
     @ManyToOne
     Question question;
 
+    @ManyToOne
+    User user;
+
     public Answer() {
     }
 

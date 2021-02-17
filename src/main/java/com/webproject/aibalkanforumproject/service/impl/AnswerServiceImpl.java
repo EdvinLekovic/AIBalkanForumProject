@@ -57,11 +57,7 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> searchAnswersByUser(String username) {
 
         User user = this.userRepository.findById(username).orElseThrow(() -> new UserNotExistException(username));
-        if(user == null){
-            return Collections.emptyList();
-        }
-        //return this.answerRepository.findAnswersByUser(user);
-        return new ArrayList<>();
+        return this.answerRepository.findAnswersByUser(user);
     }
 
     @Override

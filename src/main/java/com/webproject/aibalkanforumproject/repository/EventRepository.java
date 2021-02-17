@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    //List<Event> findByHostedBy(String hostedBy);
-    //List<Event> findByDate(LocalDateTime date);
+    List<Event> findAllByHost(String host);
+    List<Event> findAllByDate(LocalDateTime date);
 }
