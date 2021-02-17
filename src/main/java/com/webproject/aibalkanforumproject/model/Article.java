@@ -15,7 +15,10 @@ public class Article {
 
     String title;
 
+    @Column(length = 1000)
     String description;
+
+    String urlImage;
 
     @ManyToOne
     Category category;

@@ -1,0 +1,64 @@
+#header {
+    background: url("static/img/artificial-intelligence-brain.jpg") center center / cover no-repeat ;
+}
+
+div.researches {
+    display: inline-block;
+}
+
+.card {
+    display: inline-block;
+    width: 250px;
+    /* height: 250px; */
+}
+
+.col-lg-6.card {
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+}
+
+.add-article {
+
+}
+
+.card-body > .card-text {
+    display: block;
+    height: 30px;
+}
+
+section.jumbotron.text-center {
+    /* margin-bottom: -18px; */
+    display: block;
+    margin-bottom: -60px;
+}
+
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+
+body {
+    color: #5a5a5a;
+    font-family: 'Open Sans',Arial,sans-serif;
+    font-size: 15px;
+}
+h1,h2,h3,h4,h5{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.title-large {font-size: 20px; margin: 10px 0 5px; line-height: 27px; color: #141517;}
+.title-small { color: #141517; font-size: 16px; font-weight: 400; line-height: 23px; margin: 6px 0 0;}
+.title-x-small {font-size: 18px; margin: 0px;}
+.title-large a, .title-small a, .title-x-small a{color: inherit}
+
+
+
+
+
+.side-bar .nav-tabs{border-bottom:none;}
+.side-bar .nav-tabs .nav-link {color: #aeaeae; text-transform: uppercase; border: none;}
+.side-bar .nav-tabs .nav-link.active, .side-bar .nav-tabs .nav-link:hover{border-bottom:2px solid #ff0000;  text-transform: uppercase; color: #222}
+.sidebar-tabing .media{margin-top: 20px}
+.sidebar-tabing img{width: 120px;height: 100px;}
+.sidebar-tabing .title-small {line-height: 23px; margin-top: 5px; font-size: 18px}
+
+

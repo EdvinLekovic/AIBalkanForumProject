@@ -10,9 +10,14 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-#header {
-  background: url("static/img/artificial-intelligence-brain.jpg") center center / cover no-repeat ;
-}
+.side-bar .nav-tabs{border-bottom:none;}
+.side-bar .nav-tabs .nav-link {color: #aeaeae; text-transform: uppercase; border: none;}
+.side-bar .nav-tabs .nav-link.active, .side-bar .nav-tabs .nav-link:hover{border-bottom:2px solid #ff0000;  text-transform: uppercase; color: #222}
+.sidebar-tabing .media{margin-top: 20px}
+.sidebar-tabing img{width: 120px;height: 100px;}
+.sidebar-tabing .title-small {line-height: 23px; margin-top: 5px; font-size: 18px}
+
+
 
 :root {
   --blue: #007bff;
