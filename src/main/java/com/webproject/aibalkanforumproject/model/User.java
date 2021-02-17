@@ -1,16 +1,19 @@
 package com.webproject.aibalkanforumproject.model;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 //Made by Edvin Lekovic
 @Data
 @Entity
 @Table(name = "Ai_users")
-public class User  {
+public class User implements UserDetails {
     @Id
     String username;
 
@@ -19,6 +22,17 @@ public class User  {
     String lastname;
 
     String password;
+
+    private boolean isAccountNonExpired = true;
+
+    private boolean isAccountNonLocked = true;
+
+    private boolean isCredentialsNonExpired = true;
+
+    private boolean isEnabled = true;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     List<Article> articles;
@@ -30,11 +44,36 @@ public class User  {
     public User() {
     }
 
-    public User(String username,String name, String lastname, String password) {
+    public User(String username,String name, String lastname, String password, Role role) {
         this.username = username;
         this.name = name;
         this.lastname = lastname;
         this.password = password;
+        this.role = role;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(role);
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
+    }
 }
