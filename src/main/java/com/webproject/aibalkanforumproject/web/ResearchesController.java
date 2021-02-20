@@ -14,4 +14,10 @@ public class ResearchesController {
         model.addAttribute("bodyContent","researches");
         return "master-template";
     }
+
+
+//    @GetMapping
+//    public String getResearchRead(Model model){
+//    return "";
+//    }
 }

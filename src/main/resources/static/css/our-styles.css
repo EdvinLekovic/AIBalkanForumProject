@@ -42,6 +42,20 @@ section.jumbotron.text-center {
     color:#cbddc0;
 }
 
+.profile-picture {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.textarea {
+    display: block;
+    resize: revert;
+    overflow: auto;
+    width: 400px;
+    height: 300px;
+}
+
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 

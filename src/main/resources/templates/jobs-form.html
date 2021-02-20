@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <form action="/jobs/add" method="POST">
+                <input id="id" type="hidden" name="id">
+                <div class="form-group">
+                    <label for="name">Company name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           name="name"
+                           required
+                           placeholder="Company name">
+                </div>
+                <div class="form-group">
+                    <label for="price">Job Title</label>
+                    <input type="text"
+                           class="form-control"
+                           id="price"
+                           name="price"
+                           placeholder="Job Title">
+                </div>
+                <p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="role" type="radio" id="FULL_TIME" value="FULL_TIME">
+                    <label class="form-check-label" for="FULL_TIME">FULL_TIME</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="role"  type="radio" id="PART_TIME" value="PART_TIME">
+                    <label class="form-check-label" for="PART_TIME">PART_TIME</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="role"  type="radio" id="REMOTE" value="REMOTE">
+                    <label class="form-check-label" for="REMOTE">REMOTE</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="role"  type="radio" id="FREELANCE" value="FREELANCE">
+                    <label class="form-check-label" for="FREELANCE">FREELANCE</label>
+                </div>
+                </p>
+
+                <div class="form-group">
+                    <label>Job Category</label>
+                    <select name="category" class="form-control">
+                        <option>Data Science</option>
+                        <option>Machine learning</option>
+                        <option>Deep learning</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobLocation">Job Location</label>
+                    <input type="text"
+                           class="form-control"
+                           id="jobLocation"
+                           name="jobLocation"
+                           placeholder="Job Location">
+                </div>
+
+                <div class="form-group">
+                    <label for="jobSalary">Job Salary</label>
+                    <input type="text"
+                           class="form-control"
+                           id="jobSalary"
+                           name="jobSalary"
+                           placeholder="Job Salary">
+                </div>
+
+                <div class="form-group">
+                    <label for="knowLedgeSkillsAndAbilities">Required Knowledge, Skills, and Abilities</label>
+                   <textarea class="textarea" id="knowLedgeSkillsAndAbilities" name="knowLedgeSkillsAndAbilities">
+                   </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="educationAndExperience">Education + Experience</label>
+                    <textarea class="textarea" id="educationAndExperience" name="educationAndExperience">
+                   </textarea>
+                </div>
+                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                <a type="button" class="btn btn-primary" href="/jobs">Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -19,7 +19,7 @@
                         <a class="nav-link" href="#">Events</a>
                     </li>
                     <li class="nav-item m-auto">
-                        <a class="nav-link" href="/favourites">Jobs</a>
+                        <a class="nav-link" href="/jobs">Jobs</a>
                     </li>
                 </ul>
 
@@ -47,6 +47,7 @@
                 <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                 <li class="nav-item m-auto dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-fluid profile-picture" src="/img/95545246-cute-cartoon-surprised-robot.jpg" alt="" />
                         <th:block th:if="${#request.getRemoteUser() != null}"
                                   th:text="${#request.getRemoteUser()}">
                         </th:block>
