@@ -33,9 +33,10 @@ public class Article {
     public Article() {
     }
 
-    public Article(String title, String description, Category category, User user) {
+    public Article(String title, String description, String urlImage, Category category, User user) {
         this.title = title;
         this.description = description;
+        this.urlImage = urlImage;
         this.category = category;
         this.user = user;
         this.dateCreated = LocalDateTime.now();

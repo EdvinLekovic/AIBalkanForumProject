@@ -1,17 +1,15 @@
 package com.webproject.aibalkanforumproject.service.impl;
 
 
-import com.webproject.aibalkanforumproject.model.exceptions.CategoryNotFoundException;
-import com.webproject.aibalkanforumproject.model.exceptions.InvalidArticleIdException;
-import com.webproject.aibalkanforumproject.model.exceptions.InvalidTitleException;
+import com.webproject.aibalkanforumproject.model.exceptions.*;
 import com.webproject.aibalkanforumproject.model.Article;
 import com.webproject.aibalkanforumproject.model.Category;
 import com.webproject.aibalkanforumproject.model.User;
-import com.webproject.aibalkanforumproject.model.exceptions.UserNotExistException;
 import com.webproject.aibalkanforumproject.repository.ArticleRepository;
 import com.webproject.aibalkanforumproject.repository.CategoryRepository;
 import com.webproject.aibalkanforumproject.repository.UserRepository;
 import com.webproject.aibalkanforumproject.service.ArticleService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -53,12 +51,18 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article create(String title, String description, Category category, User user) {
+    public Article create(String title, String description, String urlImage, Long categoryId, String userId) {
+
+        Category category = this.categoryRepository.findById(categoryId).orElseThrow(
+                () -> new CategoryNotFoundException(categoryId));
+
+        User user = this.userRepository.findById(userId).orElseThrow(
+                () -> new UserNotFoundException(userId));
 
         if(articleRepository.findArticlesByTitle(title).stream().anyMatch(a->a.getTitle().equals(title))){
             throw new InvalidTitleException();
         }
-        return articleRepository.save(new Article(title,description,category,user));
+        return articleRepository.save(new Article(title, description, urlImage, category, user));
     }
 
     @Override
