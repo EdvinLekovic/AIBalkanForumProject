@@ -11,7 +11,7 @@ public interface ArticleService {
     List<Article> findByUser(String username);
     List<Article> findByCategory(Long categoryId);
     List<Article> findByTitle(String title);
-    Article create(String title, String description, Category category, User user);
+    Article create(String title, String description,String urlImage, Long categoryId, String userId);
     Article edit(Long id,String title,String description,Category category);
     Article delete(Long id);
 }
