@@ -73,6 +73,11 @@ font-family: 'Montserrat', sans-serif;
 .title-x-small {font-size: 18px; margin: 0px;}
 .title-large a, .title-small a, .title-x-small a{color: inherit}
 
+.border1 {
+    border-style: solid;
+    border-color: #70A17D;
+}
+
 
 
 
