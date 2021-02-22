@@ -1,8 +1,8 @@
 package com.webproject.aibalkanforumproject.service.impl;
 
 import com.webproject.aibalkanforumproject.model.Role;
-import com.webproject.aibalkanforumproject.model.exceptions.InvalidPasswordException;
 import com.webproject.aibalkanforumproject.model.User;
+import com.webproject.aibalkanforumproject.model.exceptions.InvalidPasswordException;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidUsernameException;
 import com.webproject.aibalkanforumproject.model.exceptions.PasswordsDoNotMatchException;
 import com.webproject.aibalkanforumproject.model.exceptions.UsernameAlreadyExistsException;

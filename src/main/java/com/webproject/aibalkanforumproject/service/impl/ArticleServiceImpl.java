@@ -1,6 +1,7 @@
 package com.webproject.aibalkanforumproject.service.impl;
 
 
+import com.webproject.aibalkanforumproject.model.Image;
 import com.webproject.aibalkanforumproject.model.exceptions.*;
 import com.webproject.aibalkanforumproject.model.Article;
 import com.webproject.aibalkanforumproject.model.Category;
@@ -51,7 +52,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article create(String title, String description, String urlImage, Long categoryId, String userId) {
+    public Article findById(Long id) {
+        return articleRepository.findById(id).orElseThrow(()->new InvalidArticleIdException(id));
+    }
+
+    @Override
+    public Article create(String title, String description, Long categoryId,Image image, String userId) {
 
         Category category = this.categoryRepository.findById(categoryId).orElseThrow(
                 () -> new CategoryNotFoundException(categoryId));
@@ -59,21 +65,25 @@ public class ArticleServiceImpl implements ArticleService {
         User user = this.userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException(userId));
 
-        if(articleRepository.findArticlesByTitle(title).stream().anyMatch(a->a.getTitle().equals(title))){
-            throw new InvalidTitleException();
-        }
-        return articleRepository.save(new Article(title, description, urlImage, category, user));
+//        if(articleRepository.findArticlesByTitle(title).stream().anyMatch(a->a.getTitle().equals(title))){
+//            throw new InvalidTitleException();
+//        }
+        return articleRepository.save(new Article(title, description, image, category, user));
     }
 
     @Override
-    public Article edit(Long id, String title, String description, Category category) {
+    public Article edit(Long id, String title, String description, Long categoryId,Image image) {
         Article article = articleRepository.findById(id).orElseThrow(()->new InvalidArticleIdException(id));
-        if(articleRepository.findArticlesByTitle(title).stream().anyMatch(a->a.getTitle().equals(title))){
-            throw new InvalidTitleException();
-        }
+//        if(articleRepository.findArticlesByTitle(title).stream().anyMatch(a->a.getTitle().equals(title))){
+//            throw new InvalidTitleException();
+//        }
         article.setTitle(title);
         article.setDescription(description);
+        Category category = categoryRepository.findById(categoryId).orElseThrow(()->new InvalidCategoryIdException(categoryId));
         article.setCategory(category);
+        if(image!=null){
+            article.setImage(image);
+        }
         article.setLastChangeDate(LocalDateTime.now());
         return articleRepository.save(article);
     }

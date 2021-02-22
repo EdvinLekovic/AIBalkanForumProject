@@ -12,17 +12,17 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String title;
+    private String title;
 
-    String description;
+    private String description;
 
     @ManyToOne
-    User user;
+    private User user;
 
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
-    List<Answer> answers;
+    private List<Answer> answers;
 
     public Question() {
     }

@@ -15,10 +15,10 @@ public class Favourite {
     private Long id;
 
     @ManyToOne
-    User user;
+    private User user;
 
     @ManyToMany
-    List<Article> articles;
+    private List<Article> articles;
 
     public Favourite() {
     }

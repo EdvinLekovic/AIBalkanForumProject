@@ -11,15 +11,15 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String description;
-
-    @ManyToOne
-    Question question;
+    private String description;
 
     @ManyToOne
-    User user;
+    private Question question;
+
+    @ManyToOne
+    private User user;
 
     public Answer() {
     }

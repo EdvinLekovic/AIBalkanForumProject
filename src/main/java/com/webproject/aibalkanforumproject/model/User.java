@@ -15,19 +15,22 @@ import java.util.List;
 @Table(name = "Ai_users")
 public class User implements UserDetails {
     @Id
-    String username;
+    private String username;
 
-    String name;
+    private String name;
 
-    String lastname;
+    private String lastname;
 
-    String password;
-
-    @OneToMany(mappedBy = "user")
-    List<Question> questions;
+    private String password;
 
     @OneToMany(mappedBy = "user")
-    List<Answer> answers;
+    private List<Question> questions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Answer> answers;
+
+    @ManyToOne
+    private Image image;
 
     private boolean isAccountNonExpired = true;
 
@@ -40,11 +43,8 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    List<Article> articles;
-
     @OneToOne
-    Favourite favourite;
+    private Favourite favourite;
 
 
     public User() {

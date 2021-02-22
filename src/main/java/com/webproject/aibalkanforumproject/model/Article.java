@@ -11,21 +11,24 @@ public class Article {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Long id;
+    private Long id;
 
-    String title;
+    private String title;
 
     @Column(length = 1000)
-    String description;
-
-    String urlImage;
+    private String description;
 
     @ManyToOne
-    Category category;
+    private Image image;
 
-    LocalDateTime dateCreated;
+    @ManyToOne
+    private Category category;
 
-    LocalDateTime lastChangeDate;
+    private LocalDateTime dateCreated;
+
+    private LocalDateTime lastChangeDate;
+
+
 
     @ManyToOne
     User user;
@@ -33,10 +36,10 @@ public class Article {
     public Article() {
     }
 
-    public Article(String title, String description, String urlImage, Category category, User user) {
+    public Article(String title, String description, Image image, Category category, User user) {
         this.title = title;
         this.description = description;
-        this.urlImage = urlImage;
+        this.image = image;
         this.category = category;
         this.user = user;
         this.dateCreated = LocalDateTime.now();

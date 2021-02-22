@@ -1,60 +1,60 @@
-<th:block xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block>
     <div class="container" style="background-color:#cbddc0;">
         <div class="row">
             <div class="col-md-5">
-                <label action="/researches/add" method="POST">
+                <form action="/myArticles/add" method="POST" enctype="multipart/form-data">
+                    <input id="id" type="hidden" name="id" th:value="(${article.getId()} != null ? ${article.getId()} : '')">
+                    <input id="username" type="hidden" name="username" th:value="(${#request.getRemoteUser()} != null ? ${#request.getRemoteUser()} : '')">
                     <div class="form-group">
                         <label for="title" class="mb-0 text-black-50" style="font-size:30px;">Research title</label>
                         <input type="text"
                                class="form-control"
                                id="title"
                                name="title"
-                               th:value="(${research} != null ? ${research.getTitle()} : '')"
+                               th:value="(${article} != null ? ${article.getTitle()} : '')"
                                required
                                placeholder="Enter the title of the research">
                     </div>
                     <div class="form-group">
-                        <label for="desc" class="mb-0 text-black-50" style="font-size:30px;">Research description</label>
+                        <label for="description" class="mb-0 text-black-50" style="font-size:30px;">Research
+                            description</label>
                         <textarea rows="10" cols="100"
-                                  id="desc"
-                                  name="desc"
-                                  th:value="(${research} != null ? ${research.getDescription()} : '')"
+                                  id="description"
+                                  name="description"
+                                  th:value="(${article} != null ? ${article.getDescription()} : '')"
                                   required
                                   placeholder="Enter the description of the research"
-                                  >
+                        >
                         </textarea>
                     </div>
                     <div class="form-group">
                         <label class="mb-0 text-black-50" style="font-size:30px;">Research category</label>
-                        <select name="category" class="form-control">
-                            <option th:if="${research} != null"
-                                    th:selected="${research.getCategory() != null && research.getCategory().getId() == cat.getId()}"
+                        <select name="categoryId" class="form-control">
+                            <option th:if="${article} != null"
+                                    th:selected="${article.getCategory() != null && article.getCategory().getId() == cat.getId()}"
                                     th:each="cat : ${categories}"
                                     th:value="${cat.getId()}"
                                     th:text="${cat.getName()}">
                             </option>
-                            <option th:if="${research} == null"
+                            <option th:if="${article} == null"
                                     th:each="cat : ${categories}"
                                     th:value="${cat.getId()}"
                                     th:text="${cat.getName()}">
                             </option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="img" class="mb-0 text-black-50" style="font-size:30px;">Click here to add image to your research
+<!--                        <label for="urlImage" class="btn btn-lg btn-dark btn-outline-light btn-block">Add image</label>-->
                         <input type="file"
                                class="form-control"
-                               style="display: none;"
-                               required
-                               id="img"
-                               name="img"
-                               accept="image/*"
-                               th:value="(${research} != null ? ${research.getUrlimage()} : '')"> </label>
-                    </div>
-                    <a type="submit" class="btn btn-lg btn-dark btn-outline-light btn-block" href="/researches/add">Submit</a>
-                    <a type="button" class="btn btn-lg btn-light btn-outline-dark" href="/researches/myArticles">Back</a>
-                </form>
-            </div>
+                               id="urlImage"
+                               name="urlImage"
+                               accept="image/*">
+                    <button type="submit" class="btn btn-lg btn-dark btn-outline-light btn-block">Submit</button>
+                    <a type="button" class="btn btn-lg btn-light btn-outline-dark"
+                       href="/myArticles">Back</a>
+                    </form>
         </div>
     </div>
 </th:block>
+</html>

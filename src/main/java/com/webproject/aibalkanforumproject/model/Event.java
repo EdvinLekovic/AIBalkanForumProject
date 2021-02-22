@@ -14,15 +14,15 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String title;
+    private String title;
 
-    String addressOrUrl;
+    private String addressOrUrl;
 
-    LocalDateTime date;
+    private LocalDateTime date;
 
-    String host;
+    private String host;
 
     public Event() {
     }

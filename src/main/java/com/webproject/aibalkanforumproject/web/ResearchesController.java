@@ -17,13 +17,6 @@ import java.util.List;
 @RequestMapping("/researches")
 public class ResearchesController {
 
-    private final CategoryService categoryService;
-    private final ArticleService articleService;
-
-    public ResearchesController(CategoryService categoryService, ArticleService articleService) {
-        this.categoryService = categoryService;
-        this.articleService = articleService;
-    }
 
 
     @GetMapping
@@ -32,37 +25,4 @@ public class ResearchesController {
         return "master-template";
     }
 
-    @GetMapping("/myArticles")
-    public String getMyArticlesPage(Model model){
-
-        List<Article> articles = this.articleService.findAll();
-        model.addAttribute("articles", articles);
-        model.addAttribute("bodyContent", "my-articles");
-        return "master-template";
-    }
-
-    @GetMapping("/add-form")
-    public String getAddProductPage(Model model){
-        List<Category> categories = this.categoryService.listCategories();
-        model.addAttribute("categories", categories);
-        model.addAttribute("bodyContent", "addResearch");
-
-        return "master-template";
-    }
-
-    @PostMapping("/add")
-    public String saveProduct(@RequestParam String title, @RequestParam String description,
-                              @RequestParam String urlImage, @RequestParam Long categoryId,
-                              @RequestParam String userId){
-
-        this.articleService.create(title, description, urlImage, categoryId, userId);
-        return "redirect:/my-articles";
-
-    }
-
-    @GetMapping("/id")
-    public String getResearchRead(Model model){
-        model.addAttribute("bodyContent","article");
-        return "master-template";
-    }
 }

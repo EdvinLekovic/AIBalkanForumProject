@@ -3,10 +3,7 @@ package com.webproject.aibalkanforumproject.model;
 import lombok.Data;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 //Made by Edvin Lekovic
 @Data
@@ -14,26 +11,27 @@ import java.time.LocalDateTime;
 public class Job {
 
     @Id
-    Long id;
+    private Long id;
 
-    String company;
+    private String company;
 
-    String jobTitle;
+    private String jobTitle;
 
-    JobType jobType;
+    @Enumerated(value = EnumType.STRING)
+    private JobType jobType;
 
-    String experience;
+    private String experience;
 
-    String salary;
+    private String salary;
 
-    LocalDateTime dateCreated;
+    private LocalDateTime dateCreated;
 
-    LocalDateTime deadlineApply;
+    private LocalDateTime deadlineApply;
 
-    String urlImage;
+    private String urlImage;
 
     @ManyToOne
-    Category category;
+    private Category category;
 
     public Job() {
     }

@@ -1,7 +1,7 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-</head >
-<a href="/jobs/add-form" class="btn btn-block btn-dark add-product-btn">
+</head>
+<a  sec:authorize="isAuthenticated()" href="/jobs/add-form" class="btn btn-block btn-dark add-product-btn">
     Add new job
 </a>
 <div class="job-listing-area pt-120 pb-120" style="background-color:#ffffff;">
