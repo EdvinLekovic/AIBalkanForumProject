@@ -9,8 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+
 //Made by Edvin Lekovic
 @Repository
 public interface FavouriteRepository extends JpaRepository<Favourite,Long> {
-    Favourite findFavouriteByUser(User user);
+    Optional<Favourite> findFavouriteByUser(User user);
 }

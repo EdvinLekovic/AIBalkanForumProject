@@ -1,15 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block>
-        <div class="container" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-            <div class="row card-container">
+        <div class="container"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+            <div class="row card-container border1 text-center" style="background-color:#ffffff;">
                 <div class="researches">
-                    <h3 class="card-title">Research Title 1</h3>
-                    <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"
-                        alt="" class="card-img-top" width="400" height="350">
-                    <p class="text-black-50 mb-0">Research description</p>
-                    <p class="text-black-50 mb-0">Research category</p>
-                    <p class="text-black-50 mb-0">Date</p>
-                    <a type="button" class="btn btn-lg btn-light btn-outline-dark" href="/my-articles">Back</a>
+                    <div style="background-color:#9AC4A5;"><br/>
+                        <h3 class="card-title">
+                            <th:block th:text="${article.getTitle()}"></th:block>
+                        </h3>
+                        <br/>
+                    </div>
+                    <img th:src="@{'/myArticles/image/{id}' (id=${article.getId()})}"
+                        alt="" class="card-img-top center align-content-center" width="400" height="650">
+                    <p class="text-black- mb-0 text-left"><i>Research Description:<br/>
+                        <th:block th:text="${article.getDescription()}"></th:block></i>
+                    </p>
+                    <p class="text-black-50 mb-0 text-left">Research category:
+                        <th:block th:text="${article.getCategory().getName()}"></th:block>
+                    </p>
+                    <p class="text-black-50 mb-0 text-left">Date created:
+                        <th:block th:text="${article.getDateCreated()}"></th:block>
+                    </p>
+                    <p class="text-black-50 mb-0 text-left">Author:
+                        <th:block th:text="${article.getUser().getUsername()}"></th:block>
+                    </p>
+                    <a type="button" class="btn btn-lg btn-block btn-dark btn-outline-light" href="/myArticles">Back</a>
                 </div>
             </div>
         </div>

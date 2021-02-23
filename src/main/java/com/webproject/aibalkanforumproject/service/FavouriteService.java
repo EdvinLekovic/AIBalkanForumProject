@@ -7,7 +7,7 @@ import com.webproject.aibalkanforumproject.model.Favourite;
 import java.util.List;
 //Made by Edvin Lekovic
 public interface FavouriteService {
-    List<Article> findAll(Long id);
-    List<Article> findByUser(String username);
-    Favourite addArticle(String username,Long articleId);
+    List<Article> listAllArticlesInFavourite(Long faveId);
+    Favourite getFavourite(String username);
+    Favourite addArticleToFavourites(String username,Long articleId);
 }

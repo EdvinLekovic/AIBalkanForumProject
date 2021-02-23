@@ -4,9 +4,7 @@ import com.webproject.aibalkanforumproject.model.Article;
 import com.webproject.aibalkanforumproject.model.Category;
 import com.webproject.aibalkanforumproject.model.Favourite;
 import com.webproject.aibalkanforumproject.model.User;
-import com.webproject.aibalkanforumproject.model.exceptions.FavouritesNotFound;
-import com.webproject.aibalkanforumproject.model.exceptions.InvalidArticleIdException;
-import com.webproject.aibalkanforumproject.model.exceptions.UserNotExistException;
+import com.webproject.aibalkanforumproject.model.exceptions.*;
 import com.webproject.aibalkanforumproject.repository.ArticleRepository;
 import com.webproject.aibalkanforumproject.repository.FavouriteRepository;
 import com.webproject.aibalkanforumproject.repository.UserRepository;
@@ -14,6 +12,8 @@ import com.webproject.aibalkanforumproject.service.FavouriteService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 //Made by Edvin Lekovic
 @Service
 public class FavouriteServiceImpl implements FavouriteService {
@@ -29,23 +29,36 @@ public class FavouriteServiceImpl implements FavouriteService {
     }
 
     @Override
-    public List<Article> findAll(Long id) {
-        return favouriteRepository.findById(id).orElseThrow(()->new FavouritesNotFound(id)).getArticles();
+    public List<Article> listAllArticlesInFavourite(Long faveId){
+        if(!this.favouriteRepository.findById(faveId).isPresent()){
+            throw new FavouritesNotFound(faveId);
+        }
+        return this.favouriteRepository.findById(faveId).get().getArticles();
     }
 
     @Override
-    public List<Article> findByUser(String username) {
-        User user = userRepository.findById(username).orElseThrow(()-> new UserNotExistException(username));
-        return favouriteRepository.findFavouriteByUser(user).getArticles();
+    public Favourite getFavourite(String username) {
+
+        User user = this.userRepository.findById(username).
+                orElseThrow(() -> new UserNotFoundException(username));
+        return this.favouriteRepository.findFavouriteByUser(user)
+                .orElseGet(() -> {
+                    Favourite favourite = new Favourite(user);
+                    return this.favouriteRepository.save(favourite);
+                });
     }
 
     @Override
-    public Favourite addArticle(String username, Long articleId) {
-       Article article = articleRepository.findById(articleId).orElseThrow(()->new InvalidArticleIdException(articleId));
-       User user = userRepository.findById(username).orElseThrow(()-> new UserNotExistException(username));
-       Favourite favourite = favouriteRepository.findFavouriteByUser(user);
-       favourite.getArticles().add(article);
-       return favourite;
+    public Favourite addArticleToFavourites(String username, Long articleId) {
+        Favourite favourite = this.getFavourite(username);
+        Article article = this.articleRepository.findById(articleId).
+                orElseThrow(() -> new InvalidArticleIdException(articleId));
+        if(favourite.getArticles().stream().
+                filter(r-> r.getId().equals(articleId)).collect(Collectors.toList()).size()>0)
+            throw new ArticleAlreadyInFavourites(articleId, username);
+        favourite.getArticles().add(article);
+
+        return this.favouriteRepository.save(favourite);
     }
 
 

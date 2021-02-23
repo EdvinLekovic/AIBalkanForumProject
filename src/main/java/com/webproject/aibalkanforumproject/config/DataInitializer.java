@@ -1,4 +1,4 @@
-package com.webproject.aibalkanforumproject.config;
+//package com.webproject.aibalkanforumproject.config;
 
 import com.webproject.aibalkanforumproject.model.Role;
 import com.webproject.aibalkanforumproject.service.UserService;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Component
+/*@Component
 public class DataInitializer {
 
     private final UserService userService;
@@ -27,3 +27,4 @@ public class DataInitializer {
         }
     }
 }
+*/
