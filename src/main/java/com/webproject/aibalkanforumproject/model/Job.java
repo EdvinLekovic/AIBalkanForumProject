@@ -1,51 +1,79 @@
 package com.webproject.aibalkanforumproject.model;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 //Made by Edvin Lekovic
 @Data
 @Entity
 public class Job {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String company;
+    @ManyToOne
+    private Company company;
 
-    private String jobTitle;
+    private String title;
 
     @Enumerated(value = EnumType.STRING)
     private JobType jobType;
+
+    private String description;
+
+    private String knowLedgeSkillsAndAbilities;
 
     private String experience;
 
     private String salary;
 
+    @ManyToOne
+    private Location location;
+
     private LocalDateTime dateCreated;
 
     private LocalDateTime deadlineApply;
 
-    private String urlImage;
-
     @ManyToOne
     private Category category;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private Image image;
 
     public Job() {
     }
 
 
-    public Job(Long id, String jobTitle, JobType jobType, String experience, String company, Category category,String salary,LocalDateTime deadlineApply) {
-        this.id = id;
-        this.jobTitle = jobTitle;
-        this.jobType = jobType;
-        this.experience = experience;
+    public Job(Company company,
+               String title,
+               JobType jobType,
+               String description,
+               String knowLedgeSkillsAndAbilities,
+               String experience,
+               String salary,
+               Location location,
+               LocalDateTime deadlineApply,
+               Category category,
+               Image image) {
         this.company = company;
-        this.category = category;
+        this.title = title;
+        this.jobType = jobType;
+        this.description = description;
+        this.knowLedgeSkillsAndAbilities = knowLedgeSkillsAndAbilities;
+        this.experience = experience;
         this.salary = salary;
-        this.dateCreated = LocalDateTime.now();
+        this.location = location;
         this.deadlineApply = deadlineApply;
+        this.category = category;
+        this.image = image;
+        this.dateCreated = LocalDateTime.now();
     }
 }

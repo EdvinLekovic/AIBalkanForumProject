@@ -25,10 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        //'jobs/info/{id}/image'
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/home","/researches/**","/events/**","/jobs","/jobs/info","/login","/img/**","/css/**").permitAll()
+                .antMatchers("/home","/researches/**","/events/**","/jobs","/jobs/info/**","/jobs/image/**","/login","/img/**","/css/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

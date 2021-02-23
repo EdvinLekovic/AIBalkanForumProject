@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
 </head>
@@ -12,16 +12,16 @@
                 <div class="single-job-items mb-50">
                     <div class="job-items">
                         <div class="company-img company-img-details">
-                            <a href="#"><img src="/img/job-list1.png" alt=""></a>
+                            <a href="#"><img th:src="@{'/jobs/image/{id}' (id=${job.getId()})}" alt=""></a>
                         </div>
                         <div class="job-tittle">
                             <a href="#">
-                                <h4 class=".text-dark">Digital Marketer</h4>
+                                <h4 class=".text-dark" th:text="${job.getTitle()}">Digital Marketer</h4>
                             </a>
                             <ul>
-                                <li>Creative Agency</li>
-                                <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                <li>$3500 - $4000</li>
+                                <li th:text="${job.getCompany()!=null} ? ${job.getCompany().getName()} : ''">Creative Agency</li>
+                                <li th:text="${job.getLocation()!=null} ? ${job.getLocation().getCityAndCountry()} : ''">Athens, Greece</li>
+                                <li th:text="${job.getSalary()}">$3500 - $4000</li>
                             </ul>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         <div class="small-section-tittle">
                             <h4 class=".text-dark">Job Description</h4>
                         </div>
-                        <p>It is a long established fact that a reader will beff distracted by vbthe creadable content
+                        <p th:utext="${job.getDescription()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
                             of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf
                             mcore or-lgess normal distribution of letters, as opposed to using, Content here content
                             here making it look like readable.</p>
@@ -44,26 +44,20 @@
                         <div class="small-section-tittle">
                             <h4 class=".text-dark">Required Knowledge, Skills, and Abilities</h4>
                         </div>
-                        <ul>
-                            <li>System Software Development</li>
-                            <li>Mobile Applicationin iOS/Android/Tizen or other platform</li>
-                            <li>Research and code , libraries, APIs and frameworks</li>
-                            <li>Strong knowledge on software development life cycle</li>
-                            <li>Strong problem solving and debugging skills</li>
-                        </ul>
+                        <p th:utext="${job.getKnowLedgeSkillsAndAbilities()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
+                            of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf
+                            mcore or-lgess normal distribution of letters, as opposed to using, Content here content
+                            here making it look like readable.</p>
                     </div>
                     <div class="post-details2  mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
                             <h4 class=".text-dark">Education + Experience</h4>
                         </div>
-                        <ul>
-                            <li>3 or more years of professional design experience</li>
-                            <li>Direct response email experience</li>
-                            <li>Ecommerce website design experience</li>
-                            <li>Familiarity with mobile and web apps preferred</li>
-                            <li>Experience using Invision a plus</li>
-                        </ul>
+                        <p th:utext="${job.getExperience()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
+                            of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf
+                            mcore or-lgess normal distribution of letters, as opposed to using, Content here content
+                            here making it look like readable.</p>
                     </div>
                 </div>
 
@@ -76,12 +70,11 @@
                         <h4 class=".text-dark">Job Overview</h4>
                     </div>
                     <ul>
-                        <li>Posted date : <span>12 Aug 2019</span></li>
-                        <li>Location : <span>New York</span></li>
-                        <li>Vacancy : <span>02</span></li>
-                        <li>Job nature : <span>Full time</span></li>
-                        <li>Salary : <span>$7,800 yearly</span></li>
-                        <li>Application date : <span>12 Sep 2020</span></li>
+                        <li>Posted date : <span th:text="${job.getDateCreated().getDayOfMonth() + ' ' + job.getDateCreated().getMonth() + ' ' + job.getDateCreated().getYear()}">12 Aug 2019</span></li>
+                        <li>Location : <span th:text="${job.getLocation()!=null} ? ${job.getLocation().getCityAndCountry()} : ''">New York</span></li>
+                        <li>Job nature : <span th:text="${job.getJobType()}">Full time</span></li>
+                        <li>Salary : <span th:text="${job.getSalary() + ' montly'}">$7,800 yearly</span></li>
+                        <li>Application deadline : <span th:text="${job.getDeadlineApply().getDayOfMonth() + ' ' + job.getDeadlineApply().getMonth() + ' ' + job.getDeadlineApply().getYear()}">12 Sep 2020</span></li>
                     </ul>
                     <div class="apply-btn2">
                         <a href="#" class="btn">Apply Now</a>
@@ -92,13 +85,12 @@
                     <div class="small-section-tittle">
                         <h4 class=".text-dark">Company Information</h4>
                     </div>
-                    <span>Colorlib</span>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page
+                    <span th:text="${job.getCompany()!=null} ? ${job.getCompany().getName()} : ''">Colorlib</span>
+                    <p th:text="${job.getCompany()!=null} ? ${job.getCompany().getDescription()} : ''">It is a long established fact that a reader will be distracted by the readable content of a page
                         when looking at its layout.</p>
                     <ul>
-                        <li>Name: <span>Colorlib </span></li>
-                        <li>Web : <span> colorlib.com</span></li>
-                        <li>Email: <span>carrier.colorlib@gmail.com</span></li>
+                        <li>Web : <span th:text="${job.getCompany()!=null} ? ${job.getCompany().getWebPage()} : ''"> colorlib.com</span></li>
+                        <li>Email: <span th:text="${job.getCompany()!=null} ? ${job.getCompany().getEmail()} : ''">carrier.colorlib@gmail.com</span></li>
                     </ul>
                 </div>
             </div>

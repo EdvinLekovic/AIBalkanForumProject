@@ -5,7 +5,7 @@
             <div class="col-md-5">
                 <form action="/myArticles/add" method="POST" enctype="multipart/form-data">
                     <input id="id" type="hidden" name="id" th:value="(${article} != null ? ${article.getId()} : '')">
-                    <input id="username" type="hidden" name="username" th:value="(${#request.getRemoteUser()} != null ? ${#request.getRemoteUser()} : '')">
+
                     <div class="form-group">
                         <label for="title" class="mb-0 text-black-50" style="font-size:30px;">Research title</label>
                         <input type="text"
@@ -25,8 +25,7 @@
                                   th:value="(${article} != null ? ${article.getDescription()} : '')"
                                   required
                                   placeholder="Enter the description of the research"
-                        >
-                        </textarea>
+                        ></textarea>
                     </div>
                     <div class="form-group">
                         <label class="mb-0 text-black-50" style="font-size:30px;">Research category</label>
@@ -44,16 +43,17 @@
                             </option>
                         </select>
                     </div>
-<!--                        <label for="urlImage" class="btn btn-lg btn-dark btn-outline-light btn-block">Add image</label>-->
-                        <input type="file"
-                               class="form-control"
-                               id="urlImage"
-                               name="urlImage"
-                               accept="image/*">
+                    <!--                        <label for="urlImage" class="btn btn-lg btn-dark btn-outline-light btn-block">Add image</label>-->
+                    <input type="file"
+                           class="form-control"
+                           id="urlImage"
+                           name="urlImage"
+                           accept="image/*">
                     <button type="submit" class="btn btn-lg btn-dark btn-outline-light btn-block">Submit</button>
                     <a type="button" class="btn btn-lg btn-light btn-outline-dark"
                        href="/myArticles">Back</a>
-                    </form>
+                </form>
+            </div>
         </div>
     </div>
 </th:block>

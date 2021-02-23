@@ -1,9 +1,9 @@
 package com.webproject.aibalkanforumproject.service;
 
-import com.webproject.aibalkanforumproject.model.Category;
-import com.webproject.aibalkanforumproject.model.Job;
+import com.webproject.aibalkanforumproject.model.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface JobService {
@@ -12,4 +12,29 @@ public interface JobService {
     List<Job> findByCompany(String company);
     List<Job> findByCategory(Category category);
     List<Job> findByDate(LocalDateTime dateTime);
+    Job findById(Long id);
+    Job create(String companyId,
+             String title,
+             JobType jobType,
+             String description,
+             String knowLedgeSkillsAndAbilities,
+             String experience,
+             String salary,
+             Long locationId,
+             Date deadlineApply,
+             Long categoryId,
+             Image image);
+    Job edit(Long id,
+            String companyId,
+             String title,
+             JobType jobType,
+             String description,
+             String knowLedgeSkillsAndAbilities,
+             String experience,
+             String salary,
+             Long locationId,
+             Date deadlineApply,
+             Long categoryId,
+             Image image);
+    Job delete(Long id);
 }

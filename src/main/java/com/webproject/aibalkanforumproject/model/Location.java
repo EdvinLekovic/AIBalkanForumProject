@@ -6,24 +6,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//Made by Edvin Lekovic
+
 @Data
 @Entity
-public class Category {
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
-    private String name;
+    String city;
 
-    private String description;
+    String country;
 
-    public Category() {
+    public Location() {
     }
 
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Location(String city, String country) {
+        this.city = city;
+        this.country = country;
+    }
+
+    public String getCityAndCountry(){
+        return String.format("%s, %s",city,country);
     }
 }

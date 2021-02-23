@@ -1,65 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
 </head>
 <body>
+
 <div class="container">
     <div class="row">
         <div class="col-md-5">
-            <form action="/jobs/add" method="POST">
-                <input id="id" type="hidden" name="id">
+            <form action="/jobs/add" method="POST" enctype="multipart/form-data">
+                <input id="id" type="hidden" name="id" th:value="(${job} != null ? ${job.getId()} : '')">
                 <div class="form-group">
-                    <label for="name">Company name</label>
-                    <input type="text"
-                           class="form-control"
-                           id="name"
-                           name="name"
-                           required
-                           placeholder="Company name">
+                    <label for="companyId">Company name</label>
+                    <select id="companyId" name="companyId" class="form-control">
+                        <option th:if="${job} != null"
+                                th:selected="${job.getCompany() != null && job.getCompany().getName() == com.getName()}"
+                                th:each="com : ${companies}"
+                                th:value="${com.getName()}"
+                                th:text="${com.getName()}">
+                        </option>
+                        <option th:if="${job} == null"
+                                th:each="com : ${companies}"
+                                th:value="${com.getName()}"
+                                th:text="${com.getName()}">
+                        </option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="price">Job Title</label>
+                    <label for="title">Job Title</label>
                     <input type="text"
                            class="form-control"
-                           id="price"
-                           name="price"
+                           id="title"
+                           name="title"
+                           th:value="${job} != null ? ${job.getTitle()} : ''"
                            placeholder="Job Title">
                 </div>
-                <p>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" name="role" type="radio" id="FULL_TIME" value="FULL_TIME">
-                    <label class="form-check-label" for="FULL_TIME">FULL_TIME</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" name="role"  type="radio" id="PART_TIME" value="PART_TIME">
-                    <label class="form-check-label" for="PART_TIME">PART_TIME</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" name="role"  type="radio" id="REMOTE" value="REMOTE">
-                    <label class="form-check-label" for="REMOTE">REMOTE</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" name="role"  type="radio" id="FREELANCE" value="FREELANCE">
-                    <label class="form-check-label" for="FREELANCE">FREELANCE</label>
-                </div>
-                </p>
-
                 <div class="form-group">
-                    <label>Job Category</label>
-                    <select name="category" class="form-control">
-                        <option>Data Science</option>
-                        <option>Machine learning</option>
-                        <option>Deep learning</option>
+                    <label>Job Type</label>
+                    <select name="jobType" class="form-control">
+                        <option th:if="${job} != null"
+                                th:selected="${job.getJobType() != null && job.getJobType() == jobType}"
+                                th:each="jobType : ${jobTypes}"
+                                th:value="${jobType}"
+                                th:text="${jobType}">
+                        </option>
+                        <option th:if="${job} == null"
+                                th:each="jobType : ${jobTypes}"
+                                th:value="${jobType}"
+                                th:text="${jobType}">
+                        </option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="jobLocation">Job Location</label>
-                    <input type="text"
-                           class="form-control"
-                           id="jobLocation"
-                           name="jobLocation"
-                           placeholder="Job Location">
+                    <label>Job Category</label>
+                    <select name="jobCategoryId" class="form-control">
+                        <option th:if="${job} != null"
+                                th:selected="${job.getCategory() != null && job.getCategory().getId() == cat.getId()}"
+                                th:each="cat : ${categories}"
+                                th:value="${cat.getId()}"
+                                th:text="${cat.getName()}">
+                        </option>
+                        <option th:if="${job} == null"
+                                th:each="cat : ${categories}"
+                                th:value="${cat.getId()}"
+                                th:text="${cat.getName()}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobLocationId">Job Location</label>
+                    <select id="jobLocationId" name="jobLocationId" class="form-control">
+                        <option th:if="${job} != null"
+                                th:selected="${job.getLocation() != null && job.getLocation().getId() == loc.getId()}"
+                                th:each="loc : ${locations}"
+                                th:value="${loc.getId()}"
+                                th:text="${loc.getCityAndCountry()}">
+                        </option>
+                        <option th:if="${job} == null"
+                                th:each="loc : ${locations}"
+                                th:value="${loc.getId()}"
+                                th:text="${loc.getCityAndCountry()}">
+                        </option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -68,20 +100,41 @@
                            class="form-control"
                            id="jobSalary"
                            name="jobSalary"
+                           th:value="${job!=null} ? ${job.getSalary()} : ''"
                            placeholder="Job Salary">
                 </div>
 
                 <div class="form-group">
+                    <label for="jobDescription">Job Description</label>
+                    <textarea class="textarea" th:value="${job} != null ? ${job.getDescription()} : ''"
+                              id="jobDescription" name="jobDescription"></textarea>
+                </div>
+
+                <div class="form-group">
                     <label for="knowLedgeSkillsAndAbilities">Required Knowledge, Skills, and Abilities</label>
-                   <textarea class="textarea" id="knowLedgeSkillsAndAbilities" name="knowLedgeSkillsAndAbilities">
-                   </textarea>
+                    <textarea class="textarea" th:value="${job} != null ? ${job.getKnowLedgeSkillsAndAbilities()} : ''"
+                              id="knowLedgeSkillsAndAbilities" name="knowLedgeSkillsAndAbilities"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="educationAndExperience">Education + Experience</label>
-                    <textarea class="textarea" id="educationAndExperience" name="educationAndExperience">
-                   </textarea>
+                    <textarea class="textarea" th:value="${job} != null ? ${job.getExperience()} : ''"
+                              id="educationAndExperience" name="educationAndExperience"></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label for="urlImage">Image</label>
+                    <input type="file"
+                           class="form-control"
+                           id="urlImage"
+                           name="urlImage"
+                           accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="datepicker">Deadline apply</label>
+                    <input type="text" id="datepicker" name="datepicker">
+                </div>
+
                 <button id="submit" type="submit" class="btn btn-primary">Submit</button>
                 <a type="button" class="btn btn-primary" href="/jobs">Back</a>
             </form>

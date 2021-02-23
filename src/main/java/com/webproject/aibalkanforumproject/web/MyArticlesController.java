@@ -73,11 +73,18 @@ public class MyArticlesController {
                              @RequestParam Long categoryId,
                              @RequestParam MultipartFile urlImage,
                              @RequestParam String username) throws IOException {
-        Image image = imageService.store(urlImage);
+        Image image = null;
         if(id!=null){
-            articleService.edit(id,title,description,categoryId,image);
+            if(urlImage.getOriginalFilename().isEmpty()) {
+                articleService.edit(id, title, description, categoryId, null);
+            }
+            else{
+                image = imageService.store(urlImage);
+                articleService.edit(id, title, description, categoryId, image);
+            }
         }
         else {
+             image = imageService.store(urlImage);
             this.articleService.create(title, description, categoryId, image, username);
         }
         return "redirect:/myArticles";

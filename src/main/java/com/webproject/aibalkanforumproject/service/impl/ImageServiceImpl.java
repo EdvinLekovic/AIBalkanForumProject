@@ -44,4 +44,12 @@ public class ImageServiceImpl implements ImageService {
     public List<Image> findAll() {
         return imageRepository.findAll();
     }
+
+
+    @Override
+    public Image delete(Long id) {
+        Image image = imageRepository.findById(id).orElseThrow(()->new InvalidImageIdException(id));
+        imageRepository.delete(image);
+        return image;
+    }
 }

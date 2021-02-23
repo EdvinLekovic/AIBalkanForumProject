@@ -6475,6 +6475,8 @@ form.search-box .search-form a {
 }
 
 .single-job-items .company-img img {
+    width: 85px;
+    height: 85px;
     overflow: hidden;
     float: left;
     margin-right: 32px;
@@ -6566,7 +6568,7 @@ form.search-box .search-form a {
     }
 }
 
-.items-link a {
+.items-link-edit {
     color: #8b92dd;
     display: block;
     border: 1px solid #8b92dd;
@@ -6576,15 +6578,33 @@ form.search-box .search-form a {
     margin-bottom: 25px
 }
 
+.items-link-delete {
+    color: red;
+    display: block;
+    border: 1px solid red;
+    border-radius: 30px;
+    padding: 4px 33px;
+    text-align: center;
+    margin-bottom: 25px
+}
+
+
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .items-link a {
         padding: 4px 19px
     }
 }
 
-.items-link a:hover {
+.items-link-edit:hover {
     color: #fff;
     background: #8b92dd;
+    border: 1px solid transparent
+}
+
+.items-link-delete:hover {
+    color: #fff;
+    background: red;
     border: 1px solid transparent
 }
 

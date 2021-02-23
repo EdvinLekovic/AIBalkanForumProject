@@ -11,7 +11,7 @@ import java.util.List;
 //Made by Edvin Lekovic
 @Repository
 public interface JobRepository extends JpaRepository<Job,Long> {
-    List<Job> findAllByJobTitleContains(String jobTitle);
+    List<Job> findAllByTitleContains(String jobTitle);
     List<Job> findAllByCompanyContains(String company);
     List<Job> findJobsByCategoryContains(Category category);
     List<Job> findJobsByDateCreatedContains(LocalDateTime dateTime);

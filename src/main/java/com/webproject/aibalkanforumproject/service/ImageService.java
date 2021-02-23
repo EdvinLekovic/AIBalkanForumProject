@@ -10,4 +10,5 @@ public interface ImageService {
     Image store(MultipartFile multipartFile) throws IOException;
     Image findImageById(Long id);
     List<Image> findAll();
+    Image delete(Long id);
 }
