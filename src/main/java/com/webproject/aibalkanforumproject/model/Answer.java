@@ -4,7 +4,7 @@ package com.webproject.aibalkanforumproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
-//Made by Filip Stavrov
+
 @Data
 @Entity
 public class Answer {

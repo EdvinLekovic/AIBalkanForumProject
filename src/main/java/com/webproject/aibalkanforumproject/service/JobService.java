@@ -37,4 +37,5 @@ public interface JobService {
              Long categoryId,
              Image image);
     Job delete(Long id);
+    List<Job> jobsFilter(Long categoryIdFilter,JobType jobTypeFilter,Long jobLocationIdFilter);
 }

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//Made By Filip Stavrov
-
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 

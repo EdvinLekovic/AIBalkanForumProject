@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-//Made by Edvin Lekovic
 @Data
 @Entity
 public class Job {
@@ -45,7 +44,7 @@ public class Job {
     @ManyToOne
     private Category category;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = CascadeType.ALL)
     private Image image;
 
     public Job() {

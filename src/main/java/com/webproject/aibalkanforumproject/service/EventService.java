@@ -5,7 +5,6 @@ import com.webproject.aibalkanforumproject.model.Event;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//Made by Filip Stavrov
 
 public interface EventService {
 

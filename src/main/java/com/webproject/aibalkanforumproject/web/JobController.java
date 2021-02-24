@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,7 +26,11 @@ public class JobController {
     private final CategoryService categoryService;
     private final ImageService imageService;
 
-    public JobController(JobService jobService, CompanyService companyService, LocationService locationService, CategoryService categoryService, ImageService imageService) {
+    public JobController(JobService jobService,
+                         CompanyService companyService,
+                         LocationService locationService,
+                         CategoryService categoryService,
+                         ImageService imageService) {
         this.jobService = jobService;
         this.companyService = companyService;
         this.locationService = locationService;
@@ -34,12 +39,38 @@ public class JobController {
     }
 
     @GetMapping
-    public String getJobsPage(Model model){
-        List<Job> jobs = jobService.findAll();
+    public String getJobsPage(Model model,HttpServletRequest request){
 
+        Long categoryIdFilter = (Long) request.getSession().getAttribute("categoryIdFilter");
+        JobType jobTypeFilter =(JobType) request.getSession().getAttribute("jobTypeFilter");
+        Long jobLocationIdFilter = (Long) request.getSession().getAttribute("jobLocationIdFilter");
+        List<Job> jobs = jobService.jobsFilter(categoryIdFilter,jobTypeFilter,jobLocationIdFilter);
+        addToModelCompaniesLocationsAndCategoriesJobTypes(model);
         model.addAttribute("jobs",jobs);
         model.addAttribute("bodyContent","job-list");
         return "master-template";
+    }
+
+    @PostMapping("/filter")
+    public String getCountryName(@RequestParam(required = false) Long categoryIdFilter,
+                                 @RequestParam(required = false) JobType jobTypeFilter,
+                                 @RequestParam(required = false) Long jobLocationIdFilter,
+                                 HttpServletRequest request){
+        request.getSession().setAttribute("categoryIdFilter",categoryIdFilter);
+        request.getSession().setAttribute("jobTypeFilter",jobTypeFilter);
+        request.getSession().setAttribute("jobLocationIdFilter",jobLocationIdFilter);
+        return "redirect:/jobs";
+    }
+
+    private void addToModelCompaniesLocationsAndCategoriesJobTypes(Model model) {
+        List<Company> companies = companyService.findAll();
+        List<Location> locations = locationService.findAll();
+        List<Category> categories = categoryService.listCategories();
+        List<JobType> jobTypes = List.of(JobType.FULL_TIME,JobType.PART_TIME,JobType.FREELANCE,JobType.REMOTE);
+        model.addAttribute("jobTypes",jobTypes);
+        model.addAttribute("categories",categories);
+        model.addAttribute("companies",companies);
+        model.addAttribute("locations",locations);
     }
 
     @GetMapping("/info/{id}")
@@ -62,14 +93,7 @@ public class JobController {
 
     @GetMapping("/add-form")
     public String jobFormPage(Model model){
-        List<Company> companies = companyService.findAll();
-        List<Location> locations = locationService.findAll();
-        List<Category> categories = categoryService.listCategories();
-        List<JobType> jobTypes = List.of(JobType.FULL_TIME,JobType.PART_TIME,JobType.FREELANCE,JobType.REMOTE);
-        model.addAttribute("jobTypes",jobTypes);
-        model.addAttribute("categories",categories);
-        model.addAttribute("companies",companies);
-        model.addAttribute("locations",locations);
+        addToModelCompaniesLocationsAndCategoriesJobTypes(model);
         model.addAttribute("bodyContent","jobs-form");
         return "master-template";
     }
@@ -104,7 +128,7 @@ public class JobController {
                         null);
             }
             else{
-                imageService.delete(jobService.findById(id).getImage().getId());
+                Long imageId = jobService.findById(id).getImage().getId();
                 image = imageService.store(urlImage);
                 jobService.edit(id,
                         companyId,
@@ -118,7 +142,9 @@ public class JobController {
                         datepicker,
                         jobCategoryId,
                         image);
+                imageService.delete(imageId);
             }
+
         }
         else {
             image = imageService.store(urlImage);
@@ -140,15 +166,8 @@ public class JobController {
     @GetMapping("/{id}/edit")
     public String editJob(@PathVariable Long id,Model model){
         Job job = jobService.findById(id);
-        List<JobType> jobTypes = List.of(JobType.FULL_TIME,JobType.PART_TIME,JobType.FREELANCE,JobType.REMOTE);
-        List<Company> companies = companyService.findAll();
-        List<Location> locations = locationService.findAll();
-        List<Category> categories = categoryService.listCategories();
+        addToModelCompaniesLocationsAndCategoriesJobTypes(model);
         model.addAttribute("job",job);
-        model.addAttribute("jobTypes",jobTypes);
-        model.addAttribute("categories",categories);
-        model.addAttribute("companies",companies);
-        model.addAttribute("locations",locations);
         model.addAttribute("bodyContent","jobs-form");
         return "master-template";
     }

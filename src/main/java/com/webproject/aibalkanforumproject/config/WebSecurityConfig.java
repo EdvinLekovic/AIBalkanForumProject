@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
-//Made by Filip Stavrov
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -28,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //'jobs/info/{id}/image'
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/home","/researches/**","/events/**","/jobs","/jobs/info/**","/jobs/image/**","/login","/img/**","/css/**").permitAll()
+                .antMatchers("/home","/researches/**","/events/**","/jobs","/jobs/info/**","/jobs/image/**","/jobs/filter","/login","/img/**","/css/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

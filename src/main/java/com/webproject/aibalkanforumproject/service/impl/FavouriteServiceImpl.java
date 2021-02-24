@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//Made by Edvin Lekovic
+
 @Service
 public class FavouriteServiceImpl implements FavouriteService {
 

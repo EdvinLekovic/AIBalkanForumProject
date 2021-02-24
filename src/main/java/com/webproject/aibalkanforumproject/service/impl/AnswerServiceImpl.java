@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//Made by Filip Stavrov
-
 @Service
 public class AnswerServiceImpl implements AnswerService {
 

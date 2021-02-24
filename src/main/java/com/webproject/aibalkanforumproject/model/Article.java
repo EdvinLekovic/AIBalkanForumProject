@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-//Made by Edvin Lekovic
+
 @Data
 @Entity
 public class Article {

@@ -5,7 +5,7 @@ import com.webproject.aibalkanforumproject.model.Question;
 
 import java.util.List;
 
-//Made by Filip Stavrov
+
 
 public interface AnswerService {
 

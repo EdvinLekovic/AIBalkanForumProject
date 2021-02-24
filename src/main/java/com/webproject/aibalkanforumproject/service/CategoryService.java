@@ -4,7 +4,6 @@ import com.webproject.aibalkanforumproject.model.Category;
 
 import java.util.List;
 
-//Made by Filip Stavrov
 
 public interface CategoryService {
 

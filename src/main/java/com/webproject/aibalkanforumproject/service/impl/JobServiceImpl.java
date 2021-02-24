@@ -12,6 +12,7 @@ import com.webproject.aibalkanforumproject.repository.LocationRepository;
 import com.webproject.aibalkanforumproject.service.JobService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -133,6 +134,51 @@ public class JobServiceImpl implements JobService {
         Job job = jobRepository.findById(id).orElseThrow(()->new InvalidJobIdException(id));
         jobRepository.delete(job);
         return job;
+    }
+
+    @Override
+    public List<Job> jobsFilter(Long categoryIdFilter,JobType jobTypeFilter,Long jobLocationIdFilter){
+
+
+        if (categoryIdFilter!=null&&jobTypeFilter==null&&jobLocationIdFilter==null){
+           Category category =  categoryRepository.findById(categoryIdFilter)
+                   .orElseThrow(()-> new InvalidCategoryIdException(categoryIdFilter));
+            return jobRepository.findJobsByCategory(category);
+        }
+        else if (categoryIdFilter!=null&&jobTypeFilter!=null&&jobLocationIdFilter==null){
+            Category category =  categoryRepository.findById(categoryIdFilter)
+                    .orElseThrow(()-> new InvalidCategoryIdException(categoryIdFilter));
+            return jobRepository.findJobsByCategoryAndJobType(category,jobTypeFilter);
+        }
+        else if (categoryIdFilter!=null&&jobTypeFilter!=null&&jobLocationIdFilter!=null){
+            Category category =  categoryRepository.findById(categoryIdFilter)
+                    .orElseThrow(()-> new InvalidCategoryIdException(categoryIdFilter));
+            Location location = locationRepository.findById(jobLocationIdFilter)
+                    .orElseThrow(()->new InvalidLocationIdException(jobLocationIdFilter));
+            return jobRepository.findJobsByCategoryAndJobTypeAndLocation(category,jobTypeFilter,location);
+        }
+        else if (categoryIdFilter==null&&jobTypeFilter!=null&&jobLocationIdFilter!=null){
+            Location location = locationRepository.findById(jobLocationIdFilter)
+                    .orElseThrow(()->new InvalidLocationIdException(jobLocationIdFilter));
+            return jobRepository.findJobsByJobTypeAndLocation(jobTypeFilter,location);
+        }
+        else if(categoryIdFilter==null&&jobTypeFilter==null&&jobLocationIdFilter!=null){
+            Location location = locationRepository.findById(jobLocationIdFilter)
+                    .orElseThrow(()->new InvalidLocationIdException(jobLocationIdFilter));
+            return jobRepository.findJobsByLocation(location);
+        }
+        else if (categoryIdFilter==null&&jobTypeFilter!=null&&jobLocationIdFilter==null){
+            return jobRepository.findJobsByJobType(jobTypeFilter);
+        }
+        else if(categoryIdFilter!=null&&jobTypeFilter==null&&jobLocationIdFilter!=null){
+            Category category =  categoryRepository.findById(categoryIdFilter)
+                    .orElseThrow(()-> new InvalidCategoryIdException(categoryIdFilter));
+            Location location = locationRepository.findById(jobLocationIdFilter)
+                    .orElseThrow(()->new InvalidLocationIdException(jobLocationIdFilter));
+
+            return jobRepository.findJobsByCategoryAndLocation(category,location);
+        }
+        return findAll();
     }
 
 }

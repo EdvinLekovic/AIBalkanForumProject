@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-//Made by Edvin Lekovic
+
 @Repository
 public interface ArticleRepository extends JpaRepository<Article,Long> {
     List<Article> findArticlesByUser(User user);

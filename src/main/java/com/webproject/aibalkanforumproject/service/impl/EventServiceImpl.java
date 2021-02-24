@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//Made by Filip Stavrov
-
 @Service
 public class EventServiceImpl implements EventService {
 

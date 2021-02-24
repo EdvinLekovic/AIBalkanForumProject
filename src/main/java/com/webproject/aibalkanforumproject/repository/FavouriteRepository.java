@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-//Made by Edvin Lekovic
 @Repository
 public interface FavouriteRepository extends JpaRepository<Favourite,Long> {
     Optional<Favourite> findFavouriteByUser(User user);

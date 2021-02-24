@@ -49,7 +49,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Image delete(Long id) {
         Image image = imageRepository.findById(id).orElseThrow(()->new InvalidImageIdException(id));
-        imageRepository.delete(image);
+        imageRepository.deleteById(id);
         return image;
     }
 }

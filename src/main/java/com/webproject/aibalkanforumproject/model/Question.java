@@ -5,7 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
-//Made by Filip Stavrov
+
 @Data
 @Entity
 public class Question {

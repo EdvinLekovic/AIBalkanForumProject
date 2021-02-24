@@ -79,8 +79,10 @@ public class MyArticlesController {
                 articleService.edit(id, title, description, categoryId, null);
             }
             else{
+                Long imageId = articleService.findById(id).getImage().getId();
                 image = imageService.store(urlImage);
                 articleService.edit(id, title, description, categoryId, image);
+                imageService.delete(imageId);
             }
         }
         else {

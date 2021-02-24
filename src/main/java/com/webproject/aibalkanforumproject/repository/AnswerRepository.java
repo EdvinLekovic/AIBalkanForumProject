@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-//Made by Filip Stavrov
-
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 

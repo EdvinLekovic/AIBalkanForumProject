@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-//Made by Edvin Lekovic
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
 

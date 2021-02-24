@@ -6,7 +6,7 @@ import com.webproject.aibalkanforumproject.model.Image;
 import com.webproject.aibalkanforumproject.model.User;
 
 import java.util.List;
-//Made by Edvin Lekovic
+
 public interface ArticleService {
     List<Article> findAll();
     List<Article> findByUser(String username);

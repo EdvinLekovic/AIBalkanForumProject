@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-//Made by Edvin Lekovic
+
 @Service
 public class UserServiceImpl implements UserService {
 
