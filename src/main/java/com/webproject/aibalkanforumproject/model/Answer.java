@@ -17,15 +17,7 @@ public class Answer {
 
     private String description;
 
-    @ManyToOne()
-    @JoinColumn(
-            foreignKey = @ForeignKey(
-                    name = "question_id",
-                    foreignKeyDefinition = "FOREIGN KEY (question_id) " +
-                            "REFERENCES question(id) " +
-                            "ON UPDATE CASCADE ON DELETE CASCADE"
-            )
-    )
+    @ManyToOne
     private Question question;
 
     @ManyToOne

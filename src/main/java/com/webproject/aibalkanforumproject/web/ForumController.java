@@ -60,9 +60,9 @@ public class ForumController {
     }
 
 
-    @PostMapping("/addQuestion/{id}")
+    @PostMapping("/addQuestion")
     public String addQuestion(
-            @PathVariable(required = false) Long id,
+            @RequestParam(required = false) Long id,
             @RequestParam String questionTitle,
             @RequestParam String questionText,
             @RequestParam String username){
@@ -94,6 +94,11 @@ public class ForumController {
 
     @PostMapping("/delete-question/{id}")
     public String deleteQuestion(@PathVariable Long id){
+        Question question = questionService.searchQuestionById(id);
+        List<Answer> answers = answerService.searchAnswersByQuestion(question);
+        for(int i = 0;i<answers.size();i++){
+            answerService.delete(answers.get(i).getId());
+        }
         questionService.delete(id);
         return "redirect:/forum";
     }
