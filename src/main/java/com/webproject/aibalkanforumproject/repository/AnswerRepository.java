@@ -14,5 +14,6 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
     List<Answer> findAllByDescriptionContaining(String keyWord);
     List<Answer> findAnswersByUser(User user);
     List<Answer> findAllByQuestion(Question question);
-
+    List<Answer> findAnswersByDescriptionContains(String description);
+    List<Answer> findAnswersByQuestionAndDescriptionContains(Question question,String description);
 }

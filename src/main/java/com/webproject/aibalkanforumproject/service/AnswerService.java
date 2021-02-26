@@ -9,10 +9,12 @@ import java.util.List;
 
 public interface AnswerService {
 
-    Answer create(String description, Long questionId);
+    Answer create(Long questionId,String description,String username);
     Answer delete(Long id);
     List<Answer> searchAnswersByDescription(String keyWord);
     List<Answer> searchAnswersByUser(String username);
     List<Answer> searchAllAnswersToQuestion(Long id);
-
+    List<Answer> searchAnswersByQuestion(Question question);
+    List<Answer> searchAnswersByDescriptionLike(String description);
+    List<Answer> searchAnswersByQuestionAndDescriptionLike(Question question,String description);
 }

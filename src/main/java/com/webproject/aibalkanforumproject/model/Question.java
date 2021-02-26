@@ -4,6 +4,7 @@ package com.webproject.aibalkanforumproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,14 +22,16 @@ public class Question {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
-    private List<Answer> answers;
+    private LocalDateTime dateCreated;
+
 
     public Question() {
     }
 
-    public Question(String title, String description) {
+    public Question(String title, String description,User user) {
         this.title = title;
         this.description = description;
+        this.user = user;
+        this.dateCreated = LocalDateTime.now();
     }
 }

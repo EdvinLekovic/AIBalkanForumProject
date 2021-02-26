@@ -23,12 +23,6 @@ public class User implements UserDetails {
 
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Question> questions;
-
-    @OneToMany(mappedBy = "user")
-    private List<Answer> answers;
-
     @ManyToOne
     private Image image;
 

@@ -11,6 +11,7 @@ import com.webproject.aibalkanforumproject.repository.AnswerRepository;
 import com.webproject.aibalkanforumproject.repository.QuestionRepository;
 import com.webproject.aibalkanforumproject.repository.UserRepository;
 import com.webproject.aibalkanforumproject.service.AnswerService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,13 +31,12 @@ public class AnswerServiceImpl implements AnswerService {
         this.questionRepository = questionRepository;
     }
 
+
     @Override
-    public Answer create(String description, Long questionId) {
-        Question question1 = this.questionRepository.findById(questionId).orElseThrow(() -> new QuestionNotFoundException(questionId));
-        if(description.isEmpty()){
-            throw new IllegalArgumentException();
-        }
-        return new Answer(description, question1);
+    public Answer create(Long questionId, String description, String username) {
+        Question question = questionRepository.findById(questionId).orElseThrow(()-> new QuestionNotFoundException(questionId));
+        User user = userRepository.findById(username).orElseThrow(()->new UsernameNotFoundException(username));
+        return answerRepository.save(new Answer(description,question,user));
     }
 
     @Override
@@ -67,4 +67,21 @@ public class AnswerServiceImpl implements AnswerService {
         }
         return this.answerRepository.findAllByQuestion(question);
     }
+
+    @Override
+    public List<Answer> searchAnswersByQuestion(Question question) {
+        return answerRepository.findAllByQuestion(question);
+    }
+
+    @Override
+    public List<Answer> searchAnswersByDescriptionLike(String description) {
+        return answerRepository.findAnswersByDescriptionContains(description);
+    }
+
+    @Override
+    public List<Answer> searchAnswersByQuestionAndDescriptionLike(Question question, String description) {
+        return answerRepository.findAnswersByQuestionAndDescriptionContains(question,description);
+    }
+
+
 }

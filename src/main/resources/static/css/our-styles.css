@@ -76,6 +76,29 @@ section.jumbotron.text-center {
     border-top-right-radius: calc(.25rem - 1px);
 }
 
+.forum-card {
+    display: block;
+    width: 645px;
+}
+
+.forum-card-body {
+    display: block;
+    width: 645px;
+}
+
+.search-forum-button {
+    display: inline-block;
+    width: 200px
+}
+
+.form-filter {
+    display: inline-block;
+}
+
+.button-space {
+    margin-top:10px
+}
+
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 

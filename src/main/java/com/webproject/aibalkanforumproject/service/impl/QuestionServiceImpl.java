@@ -11,6 +11,7 @@ import com.webproject.aibalkanforumproject.model.exceptions.UserNotExistExceptio
 import com.webproject.aibalkanforumproject.repository.QuestionRepository;
 import com.webproject.aibalkanforumproject.repository.UserRepository;
 import com.webproject.aibalkanforumproject.service.QuestionService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,18 +32,23 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question create(String title, String description) {
+    public Question create(String title, String description,String username) {
         if(title.isEmpty() || description.isEmpty()){
             throw new IllegalArgumentException();
         }
-        return new Question(title, description);
+        User user = userRepository.findById(username).orElseThrow(()->new UsernameNotFoundException(username));
+        return questionRepository.save(new Question(title,description,user));
     }
 
     @Override
     public Question edit(Long id, String title, String description) {
         Question question = this.questionRepository.findById(id).orElseThrow(() -> new QuestionNotFoundException(id));
-        question.setTitle(title);
-        question.setDescription(description);
+        if(title!=null&&!title.isEmpty()) {
+            question.setTitle(title);
+        }
+        if(description!=null&&!description.isEmpty()) {
+            question.setDescription(description);
+        }
         return this.questionRepository.save(question);
     }
 
@@ -67,5 +73,24 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> searchQuestionsByUser(String username) {
         User user = this.userRepository.findById(username).orElseThrow(() -> new UserNotExistException(username));
         return this.questionRepository.findQuestionsByUser(user);
+    }
+
+    @Override
+    public List<Question> findAllQuestions() {
+        return questionRepository.findAll();
+    }
+
+    @Override
+    public Question searchQuestionById(Long id) {
+        return questionRepository.findById(id).orElseThrow(()->new QuestionNotFoundException(id));
+    }
+
+    @Override
+    public List<Question> searchQuestionsByTitleAndDescriptionLike(String titleAndDesc) {
+        return questionRepository.findQuestionsByTitleLikeOrDescriptionLike(titleAndDesc);
+    }
+
+    public Question searchQuestionByIdAndTitleAndDescriptionLike(Long id,String titleAndDesc){
+        return questionRepository.findQuestionByIdAndTitleAndDescriptionLike(id,titleAndDesc);
     }
 }

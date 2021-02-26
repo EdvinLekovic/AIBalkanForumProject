@@ -2,6 +2,8 @@ package com.webproject.aibalkanforumproject.model;
 
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -15,7 +17,15 @@ public class Answer {
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne()
+    @JoinColumn(
+            foreignKey = @ForeignKey(
+                    name = "question_id",
+                    foreignKeyDefinition = "FOREIGN KEY (question_id) " +
+                            "REFERENCES question(id) " +
+                            "ON UPDATE CASCADE ON DELETE CASCADE"
+            )
+    )
     private Question question;
 
     @ManyToOne
@@ -24,8 +34,9 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(String description, Question question) {
+    public Answer(String description, Question question,User user) {
         this.description = description;
         this.question = question;
+        this.user = user;
     }
 }

@@ -106,19 +106,19 @@
 
                 <div class="form-group">
                     <label for="jobDescription">Job Description</label>
-                    <textarea class="textarea" th:value="${job} != null ? ${job.getDescription()} : ''"
+                    <textarea class="textarea" th:text="${job} != null ? ${job.getDescription()} : ''"
                               id="jobDescription" name="jobDescription"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="knowLedgeSkillsAndAbilities">Required Knowledge, Skills, and Abilities</label>
-                    <textarea class="textarea" th:value="${job} != null ? ${job.getKnowLedgeSkillsAndAbilities()} : ''"
+                    <textarea class="textarea" th:text="${job} != null ? ${job.getKnowLedgeSkillsAndAbilities()} : ''"
                               id="knowLedgeSkillsAndAbilities" name="knowLedgeSkillsAndAbilities"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="educationAndExperience">Education + Experience</label>
-                    <textarea class="textarea" th:value="${job} != null ? ${job.getExperience()} : ''"
+                    <textarea class="textarea" th:text="${job} != null ? ${job.getExperience()} : ''"
                               id="educationAndExperience" name="educationAndExperience"></textarea>
                 </div>
 
