@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    List<Event> findAllByHost(String host);
-    List<Event> findAllByDate(LocalDateTime date);
+    //List<Event> findAllByHost(String host);
+    //List<Event> findAllByDate(LocalDateTime date);
+    public List<Event> findByStartGreaterThanEqualAndFinishLessThanEqual(LocalDateTime start, LocalDateTime end);
+
 }

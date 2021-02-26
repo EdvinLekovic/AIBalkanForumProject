@@ -19,11 +19,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event create(String title, String addressOrUrl, String hostedBy) {
-        if(title.isEmpty() || addressOrUrl.isEmpty() || hostedBy.isEmpty()){
+    public Event create (String title, String description, LocalDateTime start, LocalDateTime finish) {
+        if(title.isEmpty() || description.isEmpty()){
             throw new IllegalArgumentException();
         }
-        return new Event(title, addressOrUrl, hostedBy);
+        return new Event(title, description, start, finish);
     }
 
     @Override
@@ -33,13 +33,13 @@ public class EventServiceImpl implements EventService {
         return event;
     }
 
-    @Override
-    public List<Event> findEventsByHost(String host) {
-        return this.eventRepository.findAllByHost(host);
-    }
+    //@Override
+    //public List<Event> findEventsByHost(String host) {
+      //  return this.eventRepository.findAllByHost(host);
+    //}
 
-    @Override
-    public List<Event> findEventsByDate(LocalDateTime date) {
-        return this.eventRepository.findAllByDate(date);
-    }
+    //@Override
+    //public List<Event> findEventsByDate(LocalDateTime date) {
+      //  return this.eventRepository.findAllByDate(date);
+    //}
 }

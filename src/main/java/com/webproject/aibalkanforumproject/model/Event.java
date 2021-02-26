@@ -2,14 +2,12 @@ package com.webproject.aibalkanforumproject.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Table(name = "Event")
 public class Event {
 
     @Id
@@ -18,19 +16,22 @@ public class Event {
 
     private String title;
 
-    private String addressOrUrl;
+    private String description;
 
-    private LocalDateTime date;
+    @Column(name="start")
+    private LocalDateTime start;
 
-    private String host;
+    @Column(name="end")
+    private LocalDateTime finish;
+
 
     public Event() {
     }
 
-    public Event(String title, String addressOrUrl,String host) {
+    public Event(String title, String description, LocalDateTime start, LocalDateTime finish) {
         this.title = title;
-        this.addressOrUrl = addressOrUrl;
-        this.date = LocalDateTime.now();
-        this.host = host;
+        this.description = description;
+        this.start = start;
+        this.finish = finish;
     }
 }
