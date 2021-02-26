@@ -7,13 +7,23 @@
     <div class="container mb-4">
         <div class="row">
             <div class="col-12" th:if="${questions.size() > 0 and answers.size() > 0}" >
-                <div class="table-responsive">
-                    <div class="table table-striped">
-                        <div th:each="question : ${questions}">
-                            <h4 th:text="${question.getTitle()}"></h4>
-                            <p th:text="${question.getDescription()}"></p>
-                            <div th:each="answer : ${answers}">
-                                <p th:text="${answer.getDescription()}"></p>
+                <div class="card mb-2 forum-card" th:each="question : ${questions}">
+                    <div class="card-body p-2 p-sm-3 forum-card-body">
+                        <div class="media forum-item">
+                            <div class="media-body ml-3">
+                                <small class="text-muted ml-2"
+                                       th:text="${question.getDateCreated().getDayOfMonth() + ' ' + question.getDateCreated().getMonth()
+                                            + ' ' + question.getDateCreated().getYear()}">1 hour ago</small>
+                                <h5 class="mt-1" th:text="${question.getTitle()}">Realtime fetching data</h5>
+                                <div class="mt-3 font-size-sm">
+                                    <p th:text="${question.getDescription()}">Hellooo :)</p>
+                                </div>
+                                <div class="border1 text-center" style="background-color:#9AC4A5;">My answer:
+                                    <div th:each="answer : ${answers}">
+                                        <p th:text="${answer.getDescription()}"></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -21,3 +31,4 @@
         </div>
     </div>
 </div>
+
