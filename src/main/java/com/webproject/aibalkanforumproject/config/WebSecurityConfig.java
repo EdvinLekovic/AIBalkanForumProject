@@ -1,16 +1,21 @@
 package com.webproject.aibalkanforumproject.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -26,7 +31,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //'jobs/info/{id}/image'
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/home","/researches/**","/forum/**","/events/**","/jobs","/jobs/info/**","/jobs/image/**","/jobs/filter","/login","/img/**","/css/**").permitAll()
+                .antMatchers("/",
+                        "/home",
+                        "/api/**",
+                        "/researches/**",
+                        "/forum/**",
+                        "/events/**",
+                        "/jobs",
+                        "/jobs/info/**",
+                        "/jobs/image/**",
+                        "/jobs/filter",
+                        "/login",
+                        "/img/**",
+                        "/css/**",
+                        "/icons/**",
+                        "/js/**",
+                        "/static/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
