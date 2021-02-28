@@ -5,11 +5,11 @@
 <!--    </a>-->
     <div class="row card-container">
         <div class="researches">
-            <div class="card" th:if="${articles.size() > 0}" th:each="article : ${articles}">
+            <div class="card class1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
                 <img class="card-img-top" th:src="@{'myArticles/image/{id}' (id=${article.getId()})}">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${article.getTitle()}"></h5>
-                    <p class="card-text" th:text="${article.getCategory().getName()}"></p>
+                    <p class="card-text text-light" th:text="${article.getCategory().getName()}"></p>
                     <a th:href="@{'/researches/{id}/readMore' (id=${article.getId()})}" class="btn btn-outline-success btn-sm">Read More</a>
                     <form style='display:inline;' th:action="@{'/favourites/add-article/{id}' (id=${article.getId()})}" th:method="POST">
                         <button type="submit" class="btn btn-outline-danger btn-sm">
