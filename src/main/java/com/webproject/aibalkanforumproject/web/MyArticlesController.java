@@ -5,11 +5,11 @@ import com.webproject.aibalkanforumproject.model.Category;
 import com.webproject.aibalkanforumproject.model.Image;
 import com.webproject.aibalkanforumproject.service.ArticleService;
 import com.webproject.aibalkanforumproject.service.CategoryService;
+import com.webproject.aibalkanforumproject.service.FavouriteService;
 import com.webproject.aibalkanforumproject.service.ImageService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,11 +28,13 @@ public class MyArticlesController {
     private final ArticleService articleService;
     private final CategoryService categoryService;
     private final ImageService imageService;
+    private final FavouriteService favouriteService;
 
-    public MyArticlesController(ArticleService articleService, CategoryService categoryService, ImageService imageService) {
+    public MyArticlesController(ArticleService articleService, CategoryService categoryService, ImageService imageService, FavouriteService favouriteService) {
         this.articleService = articleService;
         this.categoryService = categoryService;
         this.imageService = imageService;
+        this.favouriteService = favouriteService;
     }
 
     @GetMapping
@@ -93,7 +95,9 @@ public class MyArticlesController {
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteArticle(@PathVariable Long id){
+    public String deleteArticle(@PathVariable Long id,HttpServletRequest request){
+        String username = request.getRemoteUser();
+        this.favouriteService.delete(id,username);
         this.articleService.delete(id);
         return "redirect:/myArticles";
     }

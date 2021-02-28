@@ -12,6 +12,7 @@ import com.webproject.aibalkanforumproject.service.FavouriteService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -53,12 +54,20 @@ public class FavouriteServiceImpl implements FavouriteService {
         Favourite favourite = this.getFavourite(username);
         Article article = this.articleRepository.findById(articleId).
                 orElseThrow(() -> new InvalidArticleIdException(articleId));
-        if(favourite.getArticles().stream().
-                filter(r-> r.getId().equals(articleId)).collect(Collectors.toList()).size()>0)
+        if(favourite.getArticles().stream().anyMatch(a-> a.getId().equals(articleId)))
             throw new ArticleAlreadyInFavourites(articleId, username);
         favourite.getArticles().add(article);
 
         return this.favouriteRepository.save(favourite);
+    }
+
+    @Override
+    public Optional<Article> delete(Long articleId,String username) {
+        Favourite favourite = this.getFavourite(username);
+        Optional<Article> article = favourite.getArticles().stream().filter(a->a.getId().equals(articleId)).findAny();
+        article.ifPresent(value -> favourite.getArticles().remove(value));
+        this.favouriteRepository.save(favourite);
+        return article;
     }
 
 

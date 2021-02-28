@@ -7,6 +7,8 @@ import com.webproject.aibalkanforumproject.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,5 +39,12 @@ public class MyAnswersController {
         model.addAttribute("answers", answers);
         model.addAttribute("bodyContent", "myAnswers");
         return "master-template";
+    }
+
+    @PostMapping("/delete-answer/{answerId}/{questionId}")
+    public String deleteAnswer(@PathVariable Long answerId,
+                               @PathVariable Long questionId){
+        answerService.delete(answerId);
+        return "redirect:/myAnswers";
     }
 }

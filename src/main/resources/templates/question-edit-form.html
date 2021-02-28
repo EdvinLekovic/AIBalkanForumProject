@@ -3,7 +3,7 @@
 <div  id="threadModal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="/forum/addQuestion" method="POST">
+            <form action="/myQuestions/addQuestion" method="POST">
                 <input id="id" type="hidden" name="id" th:value="(${question} != null ? ${question.getId()} : '')">
                 <input id="username" type="hidden" name="username" th:value="${#request.getRemoteUser()}">
                 <div class="modal-header d-flex align-items-center bg-secondary text-white">

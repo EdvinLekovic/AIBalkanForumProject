@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/jobs/info/**",
                         "/jobs/image/**",
                         "/jobs/filter",
+                        "/myArticles/image/**",
                         "/login",
                         "/img/**",
                         "/css/**",

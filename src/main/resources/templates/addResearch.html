@@ -22,7 +22,7 @@
                         <textarea rows="10" cols="100"
                                   id="description"
                                   name="description"
-                                  th:value="(${article} != null ? ${article.getDescription()} : '')"
+                                  th:text="(${article} != null ? ${article.getDescription()} : '')"
                                   required
                                   placeholder="Enter the description of the research"
                         ></textarea>

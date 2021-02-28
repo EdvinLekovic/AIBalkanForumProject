@@ -115,11 +115,11 @@
                                             + ' ' + question.getDateCreated().getYear()}">13 minutes ago</span></p>
                                 </div>
                                 <div class="text-muted small text-center align-self-center">
-                                    <a sec:authorize="isAuthenticated()"
+                                    <a th:if="${question.getUser().getUsername() == #request.getRemoteUser()}"
                                        th:href="@{'/forum/edit-question/{id}' (id=${question.getId()})}"
                                        class="btn btn-outline-primary btn-sm">Edit</a>
                                     <br>
-                                    <form sec:authorize="isAuthenticated()"
+                                    <form th:if="${question.getUser().getUsername() == #request.getRemoteUser()}"
                                           th:action="@{'/forum/delete-question/{id}' (id=${question.getId()})}"
                                           th:method="POST" class="button-space">
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>

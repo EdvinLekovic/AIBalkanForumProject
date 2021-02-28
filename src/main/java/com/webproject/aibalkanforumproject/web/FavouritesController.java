@@ -51,4 +51,12 @@ public class FavouritesController {
         }
         return "redirect:/favourites" ;
     }
+
+
+    @PostMapping("/{id}/delete")
+    public String deleteArticleFavourite(@PathVariable Long id,HttpServletRequest request){
+        String username = request.getRemoteUser();
+        favouriteService.delete(id,username);
+        return "redirect:/favourites";
+    }
 }
