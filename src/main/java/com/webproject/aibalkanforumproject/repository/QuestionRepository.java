@@ -17,13 +17,13 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findQuestionsByUser(User user);
     @Query(value = "SELECT * " +
             "FROM QUESTION q " +
-            "WHERE q.title LIKE %:titleAndDesc% OR q.description LIKE %:titleAndDesc%",
+            "WHERE q.title ILIKE %:titleAndDesc% OR q.description ILIKE %:titleAndDesc%",
             nativeQuery = true)
     List<Question> findQuestionsByTitleLikeOrDescriptionLike(String titleAndDesc);
     @Query(value = "SELECT * " +
             "FROM QUESTION q " +
             "WHERE q.id = :id AND " +
-            "(q.title LIKE %:titleAndDesc% OR q.description LIKE %:titleAndDesc%)",
+            "(q.title ILIKE %:titleAndDesc% OR q.description ILIKE %:titleAndDesc%)",
             nativeQuery = true)
     Question findQuestionByIdAndTitleAndDescriptionLike(Long id,String titleAndDesc);
 }

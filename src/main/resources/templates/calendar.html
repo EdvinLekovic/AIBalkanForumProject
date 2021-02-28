@@ -4,9 +4,6 @@
     <meta charset="utf-8"/>
     <title>Using JavaScript/HTML5 Event Calendar in Spring Boot (Java) </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="css/calendar-main.css" rel="stylesheet" type="text/css">
-    <link href="icons/calendar-style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -20,7 +17,7 @@
 </div>
 
 <!-- DayPilot library -->
-<script src="js/daypilot/daypilot-all.min.js"></script>
+<script src="/js/daypilot/daypilot-all.min.js"></script>
 
 <script>
 
@@ -51,12 +48,17 @@
                 text: modal.result
             };
             DayPilot.Http.ajax({
+                type:"POST",
                 url: '/api/events/create',
                 data: params,
                 success: function (ajax) {
                     var data = ajax.data;
                     dp.events.add(new DayPilot.Event(data));
                     dp.message("Event created");
+                },
+                fail: function (ajax) {
+                    var data = ajax.data;
+                    alert("The message is unsuccessful");
                 }
             });
         });

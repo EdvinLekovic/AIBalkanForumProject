@@ -1,15 +1,15 @@
-//package com.webproject.aibalkanforumproject.service;
-//
-//import com.webproject.aibalkanforumproject.model.Event;
-//
-//import java.time.LocalDateTime;
-//import java.util.List;
-//
-//
-//public interface EventService {
-//
-////    Event create(String title, String description, LocalDateTime start, LocalDateTime finish);
-//    Event delete(Long id);
-//    //List<Event> findEventsByHost(String host);
-//    //List<Event> findEventsByDate(LocalDateTime date);
-//}
+package com.webproject.aibalkanforumproject.service;
+
+import com.webproject.aibalkanforumproject.model.Event;
+import org.apache.tomcat.jni.Local;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+
+public interface EventService {
+    Event create(LocalDateTime start,LocalDateTime end,String text);
+    Event changeDate(Long id,LocalDateTime start,LocalDateTime end);
+    Event putColor(Long id,String color);
+    List<Event> findBetween(LocalDateTime start,LocalDateTime end);
+}

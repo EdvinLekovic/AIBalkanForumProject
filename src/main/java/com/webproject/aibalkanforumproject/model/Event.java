@@ -2,10 +2,7 @@ package com.webproject.aibalkanforumproject.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,10 +15,18 @@ public class Event {
 
     private String text;
 
-    private LocalDateTime startTime;
+    private LocalDateTime start;
 
-    private LocalDateTime endTime;
+    @Column(name = "endTime")
+    private LocalDateTime end;
 
     private String color;
 
+    public Event(){}
+
+    public Event(LocalDateTime start,LocalDateTime end,String text){
+        this.start = start;
+        this.end = end;
+        this.text = text;
+    }
 }

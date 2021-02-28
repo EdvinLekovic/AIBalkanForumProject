@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface EventRepository extends CrudRepository<Event, Long> {
 
-    @Query("from Event e where not(e.endTime < :from or e.startTime > :to)")
+    @Query("from Event e where not(e.end < :from or e.start > :to)")
      List<Event> findBetween(@Param("from") @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
                                    @Param("to") @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime to);
 

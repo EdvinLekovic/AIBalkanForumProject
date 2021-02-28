@@ -80,7 +80,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> searchAnswersByQuestionAndDescriptionLike(Question question, String description) {
-        return answerRepository.findAnswersByQuestionAndDescriptionContains(question,description);
+        return answerRepository.findAnswersByQuestionAndDescriptionContains(question.getId(),description);
     }
 
 
