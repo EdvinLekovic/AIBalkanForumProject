@@ -4,7 +4,7 @@
 <a sec:authorize="hasRole('ROLE_ADMIN')" href="/jobs/add-form" class="btn btn-block btn-dark add-product-btn">
     Add new job
 </a>
-<div class="job-listing-area pt-120 pb-120" style="background: #ffffff">
+<div class="job-listing-area pt-120 pb-120" style="background: #BCCCDC">
     <div class="container">
         <div class="row">
             <!-- Left content -->
@@ -97,7 +97,7 @@
                 <!-- Job Category Listing End -->
             </div>
             <!-- Right content -->
-            <div class="col-xl-9 col-lg-9 col-md-8" style="background-color:#ffffff;">
+            <div class="col-xl-9 col-lg-9 col-md-8" style="background: #BCCCDC">
                 <!-- Featured_job_start -->
                 <section class="featured-job-area">
                     <div class="container">
@@ -111,7 +111,7 @@
                         </div>
                         <!-- Count of Job list End -->
                         <!-- single-job-content -->
-                        <div class="single-job-items mb-30" th:if="${jobs.size() > 0}" th:each="job : ${jobs}">
+                        <div class="single-job-items mb-30" th:if="${jobs.size() > 0}" th:each="job : ${jobs}" style="background: #ffffff">
                             <div class="job-items">
                                 <div class="company-img">
                                     <a th:href="@{'/jobs/info/{id}' (id=${job.getId()})}"><img
