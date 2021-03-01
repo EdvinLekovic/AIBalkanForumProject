@@ -99,6 +99,10 @@ section.jumbotron.text-center {
     margin-top:10px
 }
 
+.job-info-color {
+    color: white;
+}
+
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 

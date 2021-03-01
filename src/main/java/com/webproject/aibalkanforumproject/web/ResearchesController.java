@@ -35,6 +35,8 @@ public class ResearchesController {
     @GetMapping("/{id}/readMore")
     public String readArticle(@PathVariable Long id, Model model) throws IOException {
         Article article = this.articleService.findById(id);
+        String page = "/researches";
+        model.addAttribute("href_link",page);
         model.addAttribute("article",article);
         model.addAttribute("bodyContent", "article");
         return "master-template";

@@ -23,7 +23,7 @@
                     <p class="text-black-50 mb-0 text-left">Author:
                         <th:block th:text="${article.getUser().getUsername()}"></th:block>
                     </p>
-                    <a type="button" class="btn btn-lg btn-block btn-dark btn-outline-light" href="/myArticles">Back</a>
+                    <a type="button" class="btn btn-lg btn-block btn-dark btn-outline-light" th:href="${href_link}">Back</a>
                 </div>
             </div>
         </div>

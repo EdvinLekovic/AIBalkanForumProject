@@ -76,21 +76,18 @@
                         <li>Salary : <span th:text="${job.getSalary() + ' montly'}">$7,800 yearly</span></li>
                         <li>Application deadline : <span th:text="${job.getDeadlineApply().getDayOfMonth() + ' ' + job.getDeadlineApply().getMonth() + ' ' + job.getDeadlineApply().getYear()}">12 Sep 2020</span></li>
                     </ul>
-                    <div class="apply-btn2">
-                        <a href="#" class="btn">Apply Now</a>
-                    </div>
                 </div>
-                <div class="post-details4  mb-50">
+                <div class="post-details4  mb-50 job-info-color">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4 class=".text-dark">Company Information</h4>
+                        <h4 class="job-info-color">Company Information</h4>
                     </div>
-                    <span th:text="${job.getCompany()!=null} ? ${job.getCompany().getName()} : ''">Colorlib</span>
-                    <p th:text="${job.getCompany()!=null} ? ${job.getCompany().getDescription()} : ''">It is a long established fact that a reader will be distracted by the readable content of a page
+                    <span class="job-info-color" th:text="${job.getCompany()!=null} ? ${job.getCompany().getName()} : ''">Colorlib</span>
+                    <p class="job-info-color" th:text="${job.getCompany()!=null} ? ${job.getCompany().getDescription()} : ''">It is a long established fact that a reader will be distracted by the readable content of a page
                         when looking at its layout.</p>
                     <ul>
-                        <li>Web : <span th:text="${job.getCompany()!=null} ? ${job.getCompany().getWebPage()} : ''"> colorlib.com</span></li>
-                        <li>Email: <span th:text="${job.getCompany()!=null} ? ${job.getCompany().getEmail()} : ''">carrier.colorlib@gmail.com</span></li>
+                        <li>Web : <span class="job-info-color" th:text="${job.getCompany()!=null} ? ${job.getCompany().getWebPage()} : ''"> colorlib.com</span></li>
+                        <li>Email: <span class="job-info-color" th:text="${job.getCompany()!=null} ? ${job.getCompany().getEmail()} : ''">carrier.colorlib@gmail.com</span></li>
                     </ul>
                 </div>
             </div>

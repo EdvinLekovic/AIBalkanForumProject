@@ -1,55 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <th:block id="gallery">
-        <div class="container" style="background: #BCCCDC">
-            <div class="row">
-                <div class="researches div-width">
-                    <div class="card border1 class1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
-                        <img th:src="@{'myArticles/image/{id}' (id=${article.getId()})}"
-                             alt="" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title text-dark" th:text="${article.getTitle()}"></h5>
-                            <p class="card-text text-dark" th:text="${article.getCategory().getName()}"></p>
-                            <a th:href="@{'/researches/{id}/readMore' (id=${article.getId()})}" class="btn btn-outline-success btn-sm">Read More</a>
-                            <form style='display:inline;' th:action="@{'/favourites/add-article/{id}' (id=${article.getId()})}" th:method="POST">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
+<th:block id="gallery">
+    <div class="container" style="background: #BCCCDC">
+        <div class="row">
+            <div class="researches div-width">
+                <div class="card border1 class1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
+                    <img th:src="@{'myArticles/image/{id}' (id=${article.getId()})}"
+                         alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark" th:text="${article.getTitle()}"></h5>
+                        <p class="card-text text-dark" th:text="${article.getCategory().getName()}"></p>
+                        <a th:href="@{'/researches/{id}/readMore' (id=${article.getId()})}"
+                           class="btn btn-outline-success btn-sm">Read More</a>
+                        <form style='display:inline;'
+                              th:action="@{'/favourites/add-article/{id}' (id=${article.getId()})}" th:method="POST">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
                                      class="bi bi-heart" viewBox="0 0 16 16">
                                     <path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                                 </svg>
-                                </button>
-                            </form>
-                        </div>
+                            </button>
+                        </form>
                     </div>
+                </div>
             </div>
-                <!-- Asides of the page -->
-                <aside class="col-lg-4 side-bar col-md-12 border1 class1">
-                            <h3 class="text-center">Latest</h3>
-                    <!-- Tab panes -->
-                    <div class="tab-content sidebar-tabing" id="nav-tabContent" >
-                        <div class="tab-pane active" id="home" role="tabpanel">
-                            <div class="media" th:if="${articles.size() > 0}" th:each="article : ${articles}">
-                                <img class="d-flex mr-3"
-                                     th:src="@{'myArticles/image/{id}' (id=${article.getId()})}"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="news-title">
-                                        <h2 class="title-small"><a th:href="@{'/researches/{id}/readMore' (id=${article.getId()})}">
-                                            <th:block th:text="${article.getTitle()}"></th:block>
-                                            </a></h2>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="title-small card-text">
-                                            <th:block th:text="${article.getCategory().getName}"></th:block>
-                                        </p>
-                                    </div>
-                                    <div class="news-auther"><span class="time">1h ago</span></div>
+            <!-- Asides of the page -->
+            <aside class="col-lg-4 side-bar col-md-12 border1 class1">
+                <h3 class="text-center">Latest</h3>
+                <!-- Tab panes -->
+                <div class="tab-content sidebar-tabing" id="nav-tabContent">
+                    <div class="tab-pane active" id="home" role="tabpanel">
+                        <div class="media" th:if="${articles.size() > 0}" th:each="article : ${articles}">
+                            <img class="d-flex mr-3"
+                                 th:src="@{'myArticles/image/{id}' (id=${article.getId()})}"
+                                 alt="Generic placeholder image">
+                            <div class="media-body">
+                                <div class="news-title">
+                                    <h2 class="title-small"><a
+                                            th:href="@{'/researches/{id}/readMore' (id=${article.getId()})}">
+                                        <th:block th:text="${article.getTitle()}"></th:block>
+                                    </a></h2>
                                 </div>
+                                <div class="card-text">
+                                    <p class="title-small card-text">
+                                        <th:block th:text="${article.getCategory().getName}"></th:block>
+                                    </p>
+                                </div>
+                                <div class="news-auther"><span class="time">1h ago</span></div>
                             </div>
                         </div>
-                    </div><br/>
-                </aside>
-            </div>
+                    </div>
+                </div>
+                <br/>
+            </aside>
         </div>
-    </th:block>
+    </div>
+</th:block>
 </html>

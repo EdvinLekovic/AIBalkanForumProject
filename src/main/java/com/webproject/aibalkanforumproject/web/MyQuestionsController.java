@@ -63,9 +63,23 @@ public class MyQuestionsController {
     @GetMapping("/edit-question/{id}")
     public String editQuestion(@PathVariable Long id,Model model){
         Question question = questionService.searchQuestionById(id);
+        String page = "/myQuestions";
+        model.addAttribute("href_link",page);
         model.addAttribute("question",question);
         model.addAttribute("bodyContent","question-edit-form");
         return "master-template";
+    }
+
+    @PostMapping("/addQuestion")
+    public String addQuestion(
+            @RequestParam(required = false) Long id,
+            @RequestParam String questionTitle,
+            @RequestParam String questionText,
+            @RequestParam String username){
+        if(id!=null){
+            questionService.edit(id,questionTitle,questionText);
+        }
+        return "redirect:/myQuestions";
     }
 
     @PostMapping("/delete-question/{id}")

@@ -72,7 +72,28 @@ public class ForumController {
         else {
             questionService.create(questionTitle, questionText, username);
         }
-        return "redirect:/myQuestions";
+        return "redirect:/forum";
+    }
+
+    @GetMapping("/edit-question/{id}")
+    public String editQuestion(@PathVariable Long id,Model model){
+        Question question = questionService.searchQuestionById(id);
+        String page = "/forum";
+        model.addAttribute("href_link",page);
+        model.addAttribute("question",question);
+        model.addAttribute("bodyContent","question-edit-form");
+        return "master-template";
+    }
+
+    @PostMapping("/delete-question/{id}")
+    public String deleteQuestion(@PathVariable Long id){
+        Question question = questionService.searchQuestionById(id);
+        List<Answer> answers = answerService.searchAnswersByQuestion(question);
+        for(int i = 0;i<answers.size();i++){
+            answerService.delete(answers.get(i).getId());
+        }
+        questionService.delete(id);
+        return "redirect:/forum";
     }
 
     @PostMapping("/addAnswer/{id}")
@@ -82,6 +103,13 @@ public class ForumController {
             @RequestParam String username){
         answerService.create(id,questionText,username);
         return "redirect:/forum/info/"+id;
+    }
+
+    @PostMapping("/delete-answer/{answerId}/{questionId}")
+    public String deleteAnswer(@PathVariable Long answerId,
+                               @PathVariable Long questionId){
+        answerService.delete(answerId);
+        return "redirect:/forum/info/"+questionId;
     }
 
 

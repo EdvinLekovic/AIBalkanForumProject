@@ -48,6 +48,16 @@ public class MyArticlesController {
         return "master-template";
     }
 
+    @GetMapping("/{id}/readMore")
+    public String readArticle(@PathVariable Long id, Model model) throws IOException {
+        Article article = this.articleService.findById(id);
+        String page = "/myArticles";
+        model.addAttribute("href_link",page);
+        model.addAttribute("article",article);
+        model.addAttribute("bodyContent", "article");
+        return "master-template";
+    }
+
     @GetMapping("/image/{id}")
     public void showProductImage(@PathVariable Long id,
                                HttpServletResponse response) throws IOException {

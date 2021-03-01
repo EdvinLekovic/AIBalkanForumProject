@@ -26,10 +26,13 @@ public class Job {
     @Enumerated(value = EnumType.STRING)
     private JobType jobType;
 
+    @Column(length = 2000)
     private String description;
 
+    @Column(length = 2000)
     private String knowLedgeSkillsAndAbilities;
 
+    @Column(length = 2000)
     private String experience;
 
     private String salary;

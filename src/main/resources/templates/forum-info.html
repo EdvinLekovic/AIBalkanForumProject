@@ -80,7 +80,8 @@
                         <option value="3">No Replies Yet</option>
                     </select>
                     <span class="input-icon input-icon-sm ml-auto w-auto">
-                    <form th:action="@{'/forum/questionAndAnswerFilter/{id}' (id=${question.getId()})}" method="POST" class="form-filter">
+                    <form th:action="@{'/forum/questionAndAnswerFilter/{id}' (id=${question.getId()})}" method="POST"
+                          class="form-filter">
                         <input type="text" name="titleAndDesc"
                                class="form-control search-forum-button
                                form-control-sm bg-gray-200 border-gray-200 shadow-none mb-4 mt-4"
@@ -137,7 +138,8 @@
                                             calls?</p>
                                     </div>
                                 </div>
-                                <div class="text-muted small text-center align-self-center" th:if="${question.getUser().getUsername() == #request.getRemoteUser()}">
+                                <div class="text-muted small text-center align-self-center"
+                                     th:if="${(question.getUser().getUsername() == #request.getRemoteUser()) || (answer.getUser().getUsername() == #request.getRemoteUser())}">
                                     <form sec:authorize="isAuthenticated()"
                                           th:action="@{'/forum/delete-answer/{answerId}/{questionId}' (answerId=${answer.getId()},questionId=${question.getId()})}"
                                           th:method="POST" class="button-space">

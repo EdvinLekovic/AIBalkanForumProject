@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -33,7 +34,7 @@ public class MyAnswersController {
 
         String username = request.getRemoteUser();
         List<Answer> answers = this.answerService.searchAnswersByUser(username);
-        List<Question> questions = answers.stream().map(Answer::getQuestion).collect( Collectors.toList());
+        Set<Question> questions = answers.stream().map(Answer::getQuestion).collect(Collectors.toSet());
 
         model.addAttribute("questions", questions);
         model.addAttribute("answers", answers);

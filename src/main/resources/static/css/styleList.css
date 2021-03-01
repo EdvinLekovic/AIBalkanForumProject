@@ -7092,7 +7092,7 @@ form.search-box .search-form a {
 }
 
 .post-details4 span {
-    color: #5b5c6e;
+    color: white;
     font-weight: 700;
     margin-bottom: 10px;
     display: block;
@@ -7105,14 +7105,14 @@ form.search-box .search-form a {
 }
 
 .post-details4 ul li {
-    color: #5b5c6e;
+    color: white;
     font-weight: 700;
     font-size: 18px;
     display: block
 }
 
 .post-details4 ul li span {
-    color: #5b5c6e;
+    color: white;
     font-weight: 400;
     font-size: 16px;
     display: inline-block;
