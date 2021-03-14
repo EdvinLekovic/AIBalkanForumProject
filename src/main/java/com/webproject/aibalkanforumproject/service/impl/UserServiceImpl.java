@@ -1,5 +1,6 @@
 package com.webproject.aibalkanforumproject.service.impl;
 
+import com.webproject.aibalkanforumproject.model.Provider;
 import com.webproject.aibalkanforumproject.model.Role;
 import com.webproject.aibalkanforumproject.model.User;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidPasswordException;
@@ -54,5 +55,22 @@ public class UserServiceImpl implements UserService {
 
     public Optional<User> findByUserName(String username){
         return this.userRepository.findById(username);
+    }
+
+    @Override
+    public User registerWithGoogle(String username, String name) {
+
+        if (username==null || username.isEmpty())
+            throw new InvalidUsernameException();
+
+        if(this.userRepository.findById(username).isPresent()){
+            throw new UsernameAlreadyExistsException(username);
+        }
+        User user = new User(username, name);
+        user.setRole(Role.ROLE_USER);
+        user.setPassword(passwordEncoder.encode("123"));
+        user.setProvider(Provider.GOOGLE);
+
+         return this.userRepository.save(user);
     }
 }

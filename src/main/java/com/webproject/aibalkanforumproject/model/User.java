@@ -37,11 +37,19 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
+
     @OneToOne
     private Favourite favourite;
 
 
     public User() {
+    }
+
+    public User(String username, String name){
+        this.username = username;
+        this.name = name;
     }
 
     public User(String username,String name, String lastname, String password, Role role) {
