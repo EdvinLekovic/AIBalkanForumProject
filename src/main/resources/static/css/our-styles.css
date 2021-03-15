@@ -103,6 +103,15 @@ section.jumbotron.text-center {
     color: white;
 }
 
+.registration-buttons {
+
+}
+
+.google-link {
+    width: 184px;
+    height: 42px;
+}
+
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 

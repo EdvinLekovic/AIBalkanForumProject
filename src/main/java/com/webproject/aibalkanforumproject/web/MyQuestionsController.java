@@ -1,6 +1,7 @@
 package com.webproject.aibalkanforumproject.web;
 
 import com.webproject.aibalkanforumproject.model.Answer;
+import com.webproject.aibalkanforumproject.model.Article;
 import com.webproject.aibalkanforumproject.model.Question;
 import com.webproject.aibalkanforumproject.service.AnswerService;
 import com.webproject.aibalkanforumproject.service.QuestionService;
@@ -27,13 +28,19 @@ public class MyQuestionsController {
     public String getMyQuestionsPage(Model model, HttpServletRequest request) {
 
         String titleAndDesc = (String) request.getSession().getAttribute("titleAndDesc");
-        String username = request.getRemoteUser();
         List<Question> questions;
         if(titleAndDesc!=null){
             questions = questionService.searchQuestionsByTitleAndDescriptionLike(titleAndDesc);
         }
         else{
-            questions = questionService.searchQuestionsByUser(username);
+            String email = (String) request.getSession().getAttribute("email");
+            String username = request.getRemoteUser();
+            if(email==null) {
+                questions = this.questionService.searchQuestionsByUser(username);
+            }
+            else{
+                questions = this.questionService.searchQuestionsByUser(email);
+            }
         }
         model.addAttribute("answerService",answerService);
         model.addAttribute("questions", questions);

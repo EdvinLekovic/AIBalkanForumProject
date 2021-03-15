@@ -40,9 +40,15 @@ public class MyArticlesController {
     @GetMapping
     public String getMyArticlesPage(Model model,HttpServletRequest request) {
 
+        String email = (String) request.getSession().getAttribute("email");
         String username = request.getRemoteUser();
-        List<Article> articles = this.articleService.findByUser(username);
-
+        List<Article> articles;
+        if(email==null) {
+           articles = this.articleService.findByUser(username);
+        }
+        else{
+            articles = this.articleService.findByUser(email);
+        }
         model.addAttribute("articles", articles);
         model.addAttribute("bodyContent", "my-articles");
         return "master-template";

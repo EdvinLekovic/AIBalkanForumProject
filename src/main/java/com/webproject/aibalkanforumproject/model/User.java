@@ -1,5 +1,7 @@
 package com.webproject.aibalkanforumproject.model;
 
+import com.webproject.aibalkanforumproject.model.enumerations.Provider;
+import com.webproject.aibalkanforumproject.model.enumerations.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Data
 @Entity
@@ -52,12 +53,13 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public User(String username,String name, String lastname, String password, Role role) {
+    public User(String username,String name, String lastname, String password, Role role,Provider provider) {
         this.username = username;
         this.name = name;
         this.lastname = lastname;
         this.password = password;
         this.role = role;
+        this.provider = provider;
     }
 
     @Override

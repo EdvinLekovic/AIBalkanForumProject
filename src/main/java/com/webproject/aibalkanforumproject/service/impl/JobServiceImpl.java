@@ -1,6 +1,7 @@
 package com.webproject.aibalkanforumproject.service.impl;
 
 import com.webproject.aibalkanforumproject.model.*;
+import com.webproject.aibalkanforumproject.model.enumerations.JobType;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidCategoryIdException;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidCompanyNameException;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidJobIdException;
@@ -12,7 +13,6 @@ import com.webproject.aibalkanforumproject.repository.LocationRepository;
 import com.webproject.aibalkanforumproject.service.JobService;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;

@@ -1,6 +1,7 @@
 package com.webproject.aibalkanforumproject.service;
 
 import com.webproject.aibalkanforumproject.model.*;
+import com.webproject.aibalkanforumproject.model.enumerations.JobType;
 
 import java.time.LocalDateTime;
 import java.util.Date;

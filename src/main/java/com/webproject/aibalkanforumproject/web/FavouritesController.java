@@ -30,8 +30,15 @@ public class FavouritesController {
             model.addAttribute("error", error);
         }
 
+        String email = (String) request.getSession().getAttribute("email");
         String username = request.getRemoteUser();
-        Favourite favourite = this.favouriteService.getFavourite(username);
+        Favourite favourite;
+        if(email==null) {
+            favourite = this.favouriteService.getFavourite(username);
+        }
+        else{
+            favourite = this.favouriteService.getFavourite(email);
+        }
         List<Article> articles = this.favouriteService.listAllArticlesInFavourite(favourite.getId());
 
         model.addAttribute("articles", articles);

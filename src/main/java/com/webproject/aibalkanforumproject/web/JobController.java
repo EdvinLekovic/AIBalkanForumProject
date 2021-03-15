@@ -1,6 +1,7 @@
 package com.webproject.aibalkanforumproject.web;
 
 import com.webproject.aibalkanforumproject.model.*;
+import com.webproject.aibalkanforumproject.model.enumerations.JobType;
 import com.webproject.aibalkanforumproject.service.*;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;

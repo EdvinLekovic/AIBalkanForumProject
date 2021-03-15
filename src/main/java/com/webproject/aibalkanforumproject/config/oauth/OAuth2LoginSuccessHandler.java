@@ -4,6 +4,7 @@ import com.webproject.aibalkanforumproject.repository.UserRepository;
 import com.webproject.aibalkanforumproject.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
+import java.util.Map;
 
 @Component
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -34,12 +37,17 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
         OAuth2User oauthUser = (OAuth2User) authentication.getPrincipal();
         CustomOAuth2User user = new CustomOAuth2User(oauthUser);
-
         String email = user.getEmail();
         String name = user.getName();
-
-        if(this.userRepository.findById(email).isEmpty()){
-            this.userService.registerWithGoogle(email, name);
+        request.getSession().setAttribute("name", name);
+        request.getSession().setAttribute("email", email);
+        if (this.userRepository.findById(email).isEmpty()) {
+            if (user.getAttributes().containsKey("sub")) {
+                this.userService.registerWithGoogle(email, name);
+            } else {
+                this.userService.registerWithFacebook(email, name);
+            }
         }
-        response.sendRedirect("/home");    }
+        response.sendRedirect("/home");
+    }
 }

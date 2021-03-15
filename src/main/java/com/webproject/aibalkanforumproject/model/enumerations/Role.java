@@ -1,4 +1,4 @@
-package com.webproject.aibalkanforumproject.model;
+package com.webproject.aibalkanforumproject.model.enumerations;
 
 import org.springframework.security.core.GrantedAuthority;
 

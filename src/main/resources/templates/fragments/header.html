@@ -48,7 +48,7 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <img class="img-fluid profile-picture" src="/img/95545246-cute-cartoon-surprised-robot.jpg" alt="" />
                         <th:block th:if="${#request.getRemoteUser() != null}"
-                                  th:text="${#request.getUserPrincipal().getName()}">
+                                  th:text="(${#session.getAttribute('name')} != null ? ${#session.getAttribute('name')} : ${#request.getRemoteUser()}) ">
                         </th:block>
                     </a>
                     <div class="dropdown-menu">

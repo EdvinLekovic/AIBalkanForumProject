@@ -1,6 +1,6 @@
 package com.webproject.aibalkanforumproject.web;
 
-import com.webproject.aibalkanforumproject.model.Role;
+import com.webproject.aibalkanforumproject.model.enumerations.Role;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidPasswordException;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidUsernameException;
 import com.webproject.aibalkanforumproject.model.exceptions.PasswordsDoNotMatchException;

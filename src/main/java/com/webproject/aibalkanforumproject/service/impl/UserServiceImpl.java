@@ -1,7 +1,7 @@
 package com.webproject.aibalkanforumproject.service.impl;
 
-import com.webproject.aibalkanforumproject.model.Provider;
-import com.webproject.aibalkanforumproject.model.Role;
+import com.webproject.aibalkanforumproject.model.enumerations.Provider;
+import com.webproject.aibalkanforumproject.model.enumerations.Role;
 import com.webproject.aibalkanforumproject.model.User;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidPasswordException;
 import com.webproject.aibalkanforumproject.model.exceptions.InvalidUsernameException;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
             throw new PasswordsDoNotMatchException();
         }
 
-        return userRepository.save(new User(username,name,lastname,passwordEncoder.encode(password), role));
+        return userRepository.save(new User(username,name,lastname,passwordEncoder.encode(password), role,Provider.LOCAL));
     }
 
     @Override
@@ -59,18 +59,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerWithGoogle(String username, String name) {
+        User user = getUser(username, name, Provider.GOOGLE);
+        return this.userRepository.save(user);
+    }
 
-        if (username==null || username.isEmpty())
+    @Override
+    public User registerWithFacebook(String username, String name) {
+        User user = getUser(username, name, Provider.FACEBOOK);
+        return this.userRepository.save(user);
+    }
+
+    private User getUser(String username, String name, Provider provider) {
+        if (username == null || username.isEmpty())
             throw new InvalidUsernameException();
 
-        if(this.userRepository.findById(username).isPresent()){
+        if (this.userRepository.findById(username).isPresent()) {
             throw new UsernameAlreadyExistsException(username);
         }
         User user = new User(username, name);
         user.setRole(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode("123"));
-        user.setProvider(Provider.GOOGLE);
-
-         return this.userRepository.save(user);
+        user.setProvider(provider);
+        return user;
     }
 }

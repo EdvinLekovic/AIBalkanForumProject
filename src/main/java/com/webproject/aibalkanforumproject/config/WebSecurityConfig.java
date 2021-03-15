@@ -39,12 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //'jobs/info/{id}/image'
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/",
-                        "/home",
+                .antMatchers("/home",
                         "/api/**",
                         "/researches/**",
                         "/forum/**",
-                        "/events/**",
                         "/jobs",
                         "/jobs/info/**",
                         "/jobs/image/**",

@@ -1,6 +1,7 @@
 package com.webproject.aibalkanforumproject.web;
 
 import com.webproject.aibalkanforumproject.model.Answer;
+import com.webproject.aibalkanforumproject.model.Article;
 import com.webproject.aibalkanforumproject.model.Question;
 import com.webproject.aibalkanforumproject.service.AnswerService;
 import com.webproject.aibalkanforumproject.service.QuestionService;
@@ -32,8 +33,16 @@ public class MyAnswersController {
     @GetMapping
     public String getMyQuestionsPage(Model model, HttpServletRequest request) {
 
+        String email = (String) request.getSession().getAttribute("email");
         String username = request.getRemoteUser();
-        List<Answer> answers = this.answerService.searchAnswersByUser(username);
+        List<Answer> answers;
+        if(email==null) {
+            answers = this.answerService.searchAnswersByUser(username);
+        }
+        else{
+            answers = this.answerService.searchAnswersByUser(email);
+        }
+
         Set<Question> questions = answers.stream().map(Answer::getQuestion).collect(Collectors.toSet());
 
         model.addAttribute("questions", questions);

@@ -2,7 +2,7 @@ package com.webproject.aibalkanforumproject.repository;
 
 import com.webproject.aibalkanforumproject.model.Category;
 import com.webproject.aibalkanforumproject.model.Job;
-import com.webproject.aibalkanforumproject.model.JobType;
+import com.webproject.aibalkanforumproject.model.enumerations.JobType;
 import com.webproject.aibalkanforumproject.model.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,10 +1,8 @@
 package com.webproject.aibalkanforumproject.config;
 
-import com.webproject.aibalkanforumproject.model.Role;
+import com.webproject.aibalkanforumproject.model.enumerations.Role;
 import com.webproject.aibalkanforumproject.model.User;
 import com.webproject.aibalkanforumproject.service.UserService;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
