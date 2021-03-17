@@ -3,8 +3,9 @@
     <h1 th:if="${hasError}" th:text="${error}"></h1>
 </div>
 <div class="container">
+    <br/>
     <form class="form-signin mt-xl-5" method="post" action="/register">
-        <h6 class="form-signin-heading">Fill out the form in order to register</h6>
+        <h6 class="form-signin-heading text-light">Fill out the form in order to register</h6>
         <p>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
@@ -28,7 +29,7 @@
         <p>
         <div class="form-check form-check-inline">
             <input class="form-check-input" name="role"  type="radio" id="ROLE_USER" value="ROLE_USER">
-            <label class="form-check-label" for="ROLE_USER">ROLE_USER</label>
+            <label class="form-check-label text-light" for="ROLE_USER">ROLE_USER</label>
         </div>
         </p>
 

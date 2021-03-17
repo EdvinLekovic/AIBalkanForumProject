@@ -132,7 +132,11 @@ font-family: 'Montserrat', sans-serif;
 
 .border1 {
     border-style: solid;
-    border-color: #4B5264;
+    border-color: #A67353;
+}
+.border2{
+    border-style: solid;
+    border-color: #D4AB83;
 }
 
 
@@ -151,8 +155,18 @@ font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(to right top, #333743, #4b5362, #647283, #7d92a5, #97b3c8);
 }
 
-.class1{
-    background-image: linear-gradient(to right top, #323846, #4a5465, #637285, #7d92a6, #97b3c8);}
+.class1 {
+    background-color: #598098;
+}
+.class2 {
+    background-color: #D4AB83;
+}
+.class3{
+    background-color: #A67353;
+}
+.size1 {
+    height: 100px;
+}
 .footer{
     position: fixed;
     left: 0;

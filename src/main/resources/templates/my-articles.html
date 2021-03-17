@@ -1,11 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <div class="container">
+    <br/>
+    <br/>
 <!--    <a sec:authorize="isAuthenticated()" href="/myArticles/add-form" class="btn btn-block btn-dark add-product-btn">-->
 <!--        Add new article-->
 <!--    </a>-->
     <div class="row card-container">
         <div class="researches">
-            <div class="card class1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
+            <div class="card class2 border1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
                 <img class="card-img-top" th:src="@{'myArticles/image/{id}' (id=${article.getId()})}">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${article.getTitle()}"></h5>
@@ -33,7 +35,7 @@
                     </form>
                 </div>
             </div>
-                        <div class="card" sec:authorize="isAuthenticated()">
+                        <div class="card border1" sec:authorize="isAuthenticated()">
                             <a href="/myArticles/add-form">
                                 <img src="/img/add-article1.jpg"
                                      alt="" class="card-img add-article">

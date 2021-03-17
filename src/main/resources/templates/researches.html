@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block id="gallery">
-    <div class="container" style="background: #BCCCDC">
+    <div class="container" >
+        <br/>
+        <br/>
         <div class="row">
             <div class="researches div-width">
-                <div class="card border1 class1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
+                <div class="card border1 class2" th:if="${articles.size() > 0}" th:each="article : ${articles}">
                     <img th:src="@{'myArticles/image/{id}' (id=${article.getId()})}"
                          alt="" class="card-img-top">
                     <div class="card-body">
-                        <h5 class="card-title text-dark" th:text="${article.getTitle()}"></h5>
-                        <p class="card-text text-dark" th:text="${article.getCategory().getName()}"></p>
+                        <h5 class="card-title text-light" th:text="${article.getTitle()}"></h5>
+                        <p class="card-text text-light" th:text="${article.getCategory().getName()}"></p>
                         <a th:href="@{'/researches/{id}/readMore' (id=${article.getId()})}"
                            class="btn btn-outline-success btn-sm">Read More</a>
                         <form style='display:inline;'
@@ -25,7 +27,7 @@
                 </div>
             </div>
             <!-- Asides of the page -->
-            <aside class="col-lg-4 side-bar col-md-12 border1 class1">
+            <aside class="col-lg-4 side-bar col-md-12 border2 class3">
                 <h3 class="text-center">Latest</h3>
                 <!-- Tab panes -->
                 <div class="tab-content sidebar-tabing" id="nav-tabContent">

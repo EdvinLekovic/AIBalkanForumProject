@@ -4,12 +4,13 @@
     <link rel="stylesheet" href="/css/google&facebook.css">
 </head>
 <th:block>
-    <div class="container" style="background: #BCCCDC" >
+    <br/>
+    <div class="container">
 <!--        <div class="text-center social-btn">-->
 <!--            <a href="/oauth2/authorization/google" class="btn btn-info btn-block"><i class="fa fa-google"></i> Sign in with <b>Google</b></a>-->
 <!--        </div>-->
         <form class="form-signin mt-xl-5" method="post" action="/login">
-            <h6 class="form-signin-heading">Enter your username and password</h6>
+            <h6 class="form-signin-heading text-light">Enter your username and password</h6>
             <p>
                 <label for="username" class="sr-only">Username</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
@@ -30,12 +31,12 @@
 
             <button class="btn btn-lg btn-dark btn-outline-light btn-block" type="submit">Sign in</button>
         </form>
-        <h8>You don't have an account?</h8>
-        <br/>
-        <h8>You can register for free by clicking the button bellow</h8>
+        <h8 class="text-light">You don't have an account?</h8>
         <br/>
         <div class="registration-buttons">
-        <a href="/register" class="btn btn-light btn-outline-dark">Register here</a>
+        <a href="/register" class="btn btn-light btn-outline-dark">Click here to register!</a>
+            <br/>
+            <br/>
 <!--        <a href="/oauth2/authorization/google" class="btn">-->
 <!--        <div class="google-btn">-->
 <!--            <div class="google-icon-wrapper">-->

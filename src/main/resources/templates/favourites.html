@@ -1,12 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <div class="container">
+    <br/>
+    <br/>
     <div class="row card-container">
         <div class="researches">
-            <div class="card class1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
+            <div class="card class2 border1" th:if="${articles.size() > 0}" th:each="article : ${articles}">
                 <img th:src="@{'myArticles/image/{id}' (id=${article.getId()})}"
                      alt="" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${article.getTitle()}"></h5>
+                    <h5 class="card-title text-light" th:text="${article.getTitle()}"></h5>
                     <p class="card-text text-light" th:text="${article.getCategory().getName()}"></p>
                     <a th:href="@{'/researches/{id}/readMore' (id=${article.getId()})}"
                        class="btn btn-outline-success btn-sm">Read More</a>

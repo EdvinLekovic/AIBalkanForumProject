@@ -3,7 +3,7 @@
 
 </head>
 <!-- job post company Start -->
-<div class="job-post-company pt-120 pb-120" style="background: #BCCCDC" >
+<div class="job-post-company pt-120 pb-120">
     <div class="container">
         <div class="row">
             <!-- Left Content -->
@@ -16,12 +16,12 @@
                         </div>
                         <div class="job-tittle">
                             <a href="#">
-                                <h4 class=".text-dark" th:text="${job.getTitle()}">Digital Marketer</h4>
+                                <h4 class=" text-black-50" th:text="${job.getTitle()}">Digital Marketer</h4>
                             </a>
                             <ul>
-                                <li th:text="${job.getCompany()!=null} ? ${job.getCompany().getName()} : ''">Creative Agency</li>
-                                <li th:text="${job.getLocation()!=null} ? ${job.getLocation().getCityAndCountry()} : ''">Athens, Greece</li>
-                                <li th:text="${job.getSalary()}">$3500 - $4000</li>
+                                <li class="text-light" th:text="${job.getCompany()!=null} ? ${job.getCompany().getName()} : ''">Creative Agency</li>
+                                <li class="text-light" th:text="${job.getLocation()!=null} ? ${job.getLocation().getCityAndCountry()} : ''">Athens, Greece</li>
+                                <li class="text-light" th:text="${job.getSalary()}">$3500 - $4000</li>
                             </ul>
                         </div>
                     </div>
@@ -32,9 +32,9 @@
                     <div class="post-details1 mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4 class=".text-dark">Job Description</h4>
+                            <h4 class="text-black-50">Job Description</h4>
                         </div>
-                        <p th:utext="${job.getDescription()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
+                        <p class="text-light" th:utext="${job.getDescription()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
                             of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf
                             mcore or-lgess normal distribution of letters, as opposed to using, Content here content
                             here making it look like readable.</p>
@@ -42,9 +42,9 @@
                     <div class="post-details2  mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4 class=".text-dark">Required Knowledge, Skills, and Abilities</h4>
+                            <h4 class="text-black-50">Required Knowledge, Skills, and Abilities</h4>
                         </div>
-                        <p th:utext="${job.getKnowLedgeSkillsAndAbilities()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
+                        <p class="text-light" th:utext="${job.getKnowLedgeSkillsAndAbilities()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
                             of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf
                             mcore or-lgess normal distribution of letters, as opposed to using, Content here content
                             here making it look like readable.</p>
@@ -52,9 +52,9 @@
                     <div class="post-details2  mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4 class=".text-dark">Education + Experience</h4>
+                            <h4 class="text-black-50">Education + Experience</h4>
                         </div>
-                        <p th:utext="${job.getExperience()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
+                        <p class="text-light" th:utext="${job.getExperience()}">It is a long established fact that a reader will beff distracted by vbthe creadable content
                             of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf
                             mcore or-lgess normal distribution of letters, as opposed to using, Content here content
                             here making it look like readable.</p>
@@ -63,24 +63,24 @@
 
             </div>
             <!-- Right Content -->
-            <div class="col-xl-4 col-lg-4 border1 class1"><br/>
-                <div class="post-details3  mb-50 border1" style="background: #BCCCDC">
+            <div class="col-xl-4 col-lg-4 border1 class2"><br/>
+                <div class="post-details3  mb-50 border2 class3">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle" >
-                        <h4 class=".text-dark">Job Overview</h4>
+                        <h4 class="text-black-50">Job Overview</h4>
                     </div>
                     <ul>
-                        <li>Posted date : <span th:text="${job.getDateCreated().getDayOfMonth() + ' ' + job.getDateCreated().getMonth() + ' ' + job.getDateCreated().getYear()}">12 Aug 2019</span></li>
-                        <li>Location : <span th:text="${job.getLocation()!=null} ? ${job.getLocation().getCityAndCountry()} : ''">New York</span></li>
-                        <li>Job nature : <span th:text="${job.getJobType()}">Full time</span></li>
-                        <li>Salary : <span th:text="${job.getSalary() + ' montly'}">$7,800 yearly</span></li>
-                        <li>Application deadline : <span th:text="${job.getDeadlineApply().getDayOfMonth() + ' ' + job.getDeadlineApply().getMonth() + ' ' + job.getDeadlineApply().getYear()}">12 Sep 2020</span></li>
+                        <li class="text-black-50">Posted date : <span th:text="${job.getDateCreated().getDayOfMonth() + ' ' + job.getDateCreated().getMonth() + ' ' + job.getDateCreated().getYear()}">12 Aug 2019</span></li>
+                        <li class="text-black-50">Location : <span th:text="${job.getLocation()!=null} ? ${job.getLocation().getCityAndCountry()} : ''">New York</span></li>
+                        <li class="text-black-50">Job nature : <span th:text="${job.getJobType()}">Full time</span></li>
+                        <li class="text-black-50">Salary : <span th:text="${job.getSalary() + ' montly'}">$7,800 yearly</span></li>
+                        <li class="text-black-50">Application deadline : <span th:text="${job.getDeadlineApply().getDayOfMonth() + ' ' + job.getDeadlineApply().getMonth() + ' ' + job.getDeadlineApply().getYear()}">12 Sep 2020</span></li>
                     </ul>
                 </div>
                 <div class="post-details4  mb-50 job-info-color">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4 class="job-info-color">Company Information</h4>
+                        <h4 class="text-black-50">Company Information</h4>
                     </div>
                     <span class="job-info-color" th:text="${job.getCompany()!=null} ? ${job.getCompany().getName()} : ''">Colorlib</span>
                     <p class="job-info-color" th:text="${job.getCompany()!=null} ? ${job.getCompany().getDescription()} : ''">It is a long established fact that a reader will be distracted by the readable content of a page
