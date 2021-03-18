@@ -29,51 +29,46 @@ public class MyQuestionsController {
 
         String titleAndDesc = (String) request.getSession().getAttribute("titleAndDesc");
         List<Question> questions;
-        if(titleAndDesc!=null){
+        if (titleAndDesc != null) {
             questions = questionService.searchQuestionsByTitleAndDescriptionLike(titleAndDesc);
+        } else {
+            String username = (request.getSession().getAttribute("email")) == null ?
+                    request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
+
+            questions = this.questionService.searchQuestionsByUser(username);
+
         }
-        else{
-            String email = (String) request.getSession().getAttribute("email");
-            String username = request.getRemoteUser();
-            if(email==null) {
-                questions = this.questionService.searchQuestionsByUser(username);
-            }
-            else{
-                questions = this.questionService.searchQuestionsByUser(email);
-            }
-        }
-        model.addAttribute("answerService",answerService);
+        model.addAttribute("answerService", answerService);
         model.addAttribute("questions", questions);
         model.addAttribute("bodyContent", "myQuestions");
         return "master-template";
     }
 
     @GetMapping("/info/{id}")
-    public String getMyQuestionsInfoPage(@PathVariable Long id,Model model,HttpServletRequest request){
+    public String getMyQuestionsInfoPage(@PathVariable Long id, Model model, HttpServletRequest request) {
         String titleAndDesc = (String) request.getSession().getAttribute("titleAndDesc");
         Question question = questionService.searchQuestionById(id);
         List<Answer> answers;
-        if(titleAndDesc!=null){
+        if (titleAndDesc != null) {
             answers = answerService.
-                    searchAnswersByQuestionAndDescriptionLike(question,titleAndDesc);
-        }
-        else{
+                    searchAnswersByQuestionAndDescriptionLike(question, titleAndDesc);
+        } else {
             answers = answerService.searchAnswersByQuestion(question);
         }
-        model.addAttribute("question",question);
-        model.addAttribute("numAnswers",answers.size());
-        model.addAttribute("answers",answers);
-        model.addAttribute("bodyContent","myQuestions-info");
+        model.addAttribute("question", question);
+        model.addAttribute("numAnswers", answers.size());
+        model.addAttribute("answers", answers);
+        model.addAttribute("bodyContent", "myQuestions-info");
         return "master-template";
     }
 
     @GetMapping("/edit-question/{id}")
-    public String editQuestion(@PathVariable Long id,Model model){
+    public String editQuestion(@PathVariable Long id, Model model) {
         Question question = questionService.searchQuestionById(id);
         String page = "/myQuestions";
-        model.addAttribute("href_link",page);
-        model.addAttribute("question",question);
-        model.addAttribute("bodyContent","question-edit-form");
+        model.addAttribute("href_link", page);
+        model.addAttribute("question", question);
+        model.addAttribute("bodyContent", "question-edit-form");
         return "master-template";
     }
 
@@ -82,18 +77,18 @@ public class MyQuestionsController {
             @RequestParam(required = false) Long id,
             @RequestParam String questionTitle,
             @RequestParam String questionText,
-            @RequestParam String username){
-        if(id!=null){
-            questionService.edit(id,questionTitle,questionText);
+            @RequestParam String username) {
+        if (id != null) {
+            questionService.edit(id, questionTitle, questionText);
         }
         return "redirect:/myQuestions";
     }
 
     @PostMapping("/delete-question/{id}")
-    public String deleteQuestion(@PathVariable Long id){
+    public String deleteQuestion(@PathVariable Long id) {
         Question question = questionService.searchQuestionById(id);
         List<Answer> answers = answerService.searchAnswersByQuestion(question);
-        for(int i = 0;i<answers.size();i++){
+        for (int i = 0; i < answers.size(); i++) {
             answerService.delete(answers.get(i).getId());
         }
         questionService.delete(id);
@@ -102,23 +97,23 @@ public class MyQuestionsController {
 
     @PostMapping("/delete-answer/{answerId}/{questionId}")
     public String deleteAnswer(@PathVariable Long answerId,
-                               @PathVariable Long questionId){
+                               @PathVariable Long questionId) {
         answerService.delete(answerId);
-        return "redirect:/myQuestions/info/"+questionId;
+        return "redirect:/myQuestions/info/" + questionId;
     }
 
     @PostMapping("/questionFilter")
     public String questionFilter(@RequestParam String titleAndDesc,
-                                 HttpServletRequest request){
-        request.getSession().setAttribute("titleAndDesc",titleAndDesc);
+                                 HttpServletRequest request) {
+        request.getSession().setAttribute("titleAndDesc", titleAndDesc);
         return "redirect:/myQuestions";
     }
 
     @PostMapping("/questionAndAnswerFilter/{id}")
     public String questionAndAnswerFilter(@PathVariable Long id,
                                           @RequestParam String titleAndDesc,
-                                          HttpServletRequest request){
-        request.getSession().setAttribute("titleAndDesc",titleAndDesc);
-        return "redirect:/myQuestions/info/"+id;
+                                          HttpServletRequest request) {
+        request.getSession().setAttribute("titleAndDesc", titleAndDesc);
+        return "redirect:/myQuestions/info/" + id;
     }
 }

@@ -117,11 +117,11 @@
                                             + ' ' + question.getDateCreated().getYear()}">13 minutes ago</span></p>
                                 </div>
                                 <div class="text-muted small text-center align-self-center">
-                                    <a th:if="${question.getUser().getUsername() == #request.getRemoteUser()}"
+                                    <a th:if="${question.getUser().getUsername() == #request.getRemoteUser() || question.getUser().getUsername() == #session.getAttribute('email')}"
                                        th:href="@{'/forum/edit-question/{id}' (id=${question.getId()})}"
                                        class="btn btn-outline-primary btn-sm">Edit</a>
                                     <br>
-                                    <form th:if="${question.getUser().getUsername() == #request.getRemoteUser()}"
+                                    <form th:if="${question.getUser().getUsername() == #request.getRemoteUser() || question.getUser().getUsername() == #session.getAttribute('email')}"
                                           th:action="@{'/forum/delete-question/{id}' (id=${question.getId()})}"
                                           th:method="POST" class="button-space">
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
@@ -147,7 +147,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form action="/forum/addQuestion"  method="POST">
-                        <input id="username" type="hidden" name="username" th:value="${#request.getRemoteUser()}">
+                        <input id="username" type="hidden" name="username" th:value="(${#session.getAttribute('email')} != null ? ${#session.getAttribute('email')} : ${#request.getRemoteUser()})">
                         <div class="modal-header d-flex align-items-center bg-secondary text-white">
                             <h6 class="modal-title mb-0" id="threadModalLabel">Ask Question</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

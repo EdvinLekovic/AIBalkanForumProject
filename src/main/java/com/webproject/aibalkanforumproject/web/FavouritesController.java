@@ -23,47 +23,44 @@ public class FavouritesController {
 
 
     @GetMapping
-    public String getFavouritesPage(Model model, HttpServletRequest request, @RequestParam(required = false) String error){
+    public String getFavouritesPage(Model model, HttpServletRequest request, @RequestParam(required = false) String error) {
 
-        if(error != null && !error.isEmpty()){
+        if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
 
-        String email = (String) request.getSession().getAttribute("email");
-        String username = request.getRemoteUser();
+        String username = (request.getSession().getAttribute("email")) == null ?
+                request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
         Favourite favourite;
-        if(email==null) {
-            favourite = this.favouriteService.getFavourite(username);
-        }
-        else{
-            favourite = this.favouriteService.getFavourite(email);
-        }
+        favourite = this.favouriteService.getFavourite(username);
+
         List<Article> articles = this.favouriteService.listAllArticlesInFavourite(favourite.getId());
 
         model.addAttribute("articles", articles);
-        model.addAttribute("bodyContent","favourites");
+        model.addAttribute("bodyContent", "favourites");
 
         return "master-template";
     }
 
     @PostMapping("/add-article/{id}")
-    public String addArticleFavourite(@PathVariable Long id, HttpServletRequest request){
-        try{
-            String username = request.getRemoteUser();
-            Favourite favourite = this.favouriteService.addArticleToFavourites(username, id);
+    public String addArticleFavourite(@PathVariable Long id, HttpServletRequest request) {
+        try {
+            String username = (request.getSession().getAttribute("email")) == null ?
+                    request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
+            this.favouriteService.addArticleToFavourites(username, id);
 
-        }catch (ArticleAlreadyInFavourites exception){
+        } catch (ArticleAlreadyInFavourites exception) {
             return "redirect:/favourites?error=" + exception.getMessage();
         }
-        return "redirect:/favourites" ;
+        return "redirect:/favourites";
     }
 
 
     @PostMapping("/{id}/delete")
-    public String deleteArticleFavourite(@PathVariable Long id,HttpServletRequest request){
-        String username = request.getRemoteUser();
-        favouriteService.delete(id,username);
+    public String deleteArticleFavourite(@PathVariable Long id, HttpServletRequest request) {
+        String username = (request.getSession().getAttribute("email")) == null ? request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
+        favouriteService.delete(id, username);
         return "redirect:/favourites";
     }
 }

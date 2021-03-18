@@ -38,17 +38,14 @@ public class MyArticlesController {
     }
 
     @GetMapping
-    public String getMyArticlesPage(Model model,HttpServletRequest request) {
+    public String getMyArticlesPage(Model model, HttpServletRequest request) {
 
-        String email = (String) request.getSession().getAttribute("email");
-        String username = request.getRemoteUser();
+        String username = (request.getSession().getAttribute("email")) == null ?
+                request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
         List<Article> articles;
-        if(email==null) {
-           articles = this.articleService.findByUser(username);
-        }
-        else{
-            articles = this.articleService.findByUser(email);
-        }
+
+        articles = this.articleService.findByUser(username);
+
         model.addAttribute("articles", articles);
         model.addAttribute("bodyContent", "my-articles");
         return "master-template";
@@ -58,15 +55,15 @@ public class MyArticlesController {
     public String readArticle(@PathVariable Long id, Model model) throws IOException {
         Article article = this.articleService.findById(id);
         String page = "/myArticles";
-        model.addAttribute("href_link",page);
-        model.addAttribute("article",article);
+        model.addAttribute("href_link", page);
+        model.addAttribute("article", article);
         model.addAttribute("bodyContent", "article");
         return "master-template";
     }
 
     @GetMapping("/image/{id}")
     public void showProductImage(@PathVariable Long id,
-                               HttpServletResponse response) throws IOException {
+                                 HttpServletResponse response) throws IOException {
         response.setContentType("image/*");
 
         Article article = articleService.findById(id);
@@ -76,7 +73,7 @@ public class MyArticlesController {
     }
 
     @GetMapping("/add-form")
-    public String getAddProductPage(Model model){
+    public String getAddProductPage(Model model) {
         List<Category> categories = this.categoryService.listCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("bodyContent", "addResearch");
@@ -92,37 +89,35 @@ public class MyArticlesController {
                              @RequestParam MultipartFile urlImage,
                              @RequestParam String username) throws IOException {
         Image image = null;
-        if(id!=null){
-            if(urlImage.getOriginalFilename().isEmpty()) {
+        if (id != null) {
+            if (urlImage.getOriginalFilename().isEmpty()) {
                 articleService.edit(id, title, description, categoryId, null);
-            }
-            else{
+            } else {
                 Long imageId = articleService.findById(id).getImage().getId();
                 image = imageService.store(urlImage);
                 articleService.edit(id, title, description, categoryId, image);
                 imageService.delete(imageId);
             }
-        }
-        else {
-             image = imageService.store(urlImage);
+        } else {
+            image = imageService.store(urlImage);
             this.articleService.create(title, description, categoryId, image, username);
         }
         return "redirect:/myArticles";
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteArticle(@PathVariable Long id,HttpServletRequest request){
+    public String deleteArticle(@PathVariable Long id, HttpServletRequest request) {
         String username = request.getRemoteUser();
-        this.favouriteService.delete(id,username);
+        this.favouriteService.delete(id, username);
         this.articleService.delete(id);
         return "redirect:/myArticles";
     }
 
     @GetMapping("/{id}/edit")
-    public String editArticle(@PathVariable Long id,Model model) throws IOException {
+    public String editArticle(@PathVariable Long id, Model model) throws IOException {
         List<Category> categories = this.categoryService.listCategories();
         Article article = articleService.findById(id);
-        model.addAttribute("article",article);
+        model.addAttribute("article", article);
         model.addAttribute("categories", categories);
         model.addAttribute("bodyContent", "addResearch");
         return "master-template";

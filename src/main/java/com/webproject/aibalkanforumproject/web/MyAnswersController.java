@@ -33,15 +33,12 @@ public class MyAnswersController {
     @GetMapping
     public String getMyQuestionsPage(Model model, HttpServletRequest request) {
 
-        String email = (String) request.getSession().getAttribute("email");
-        String username = request.getRemoteUser();
+        String username = (request.getSession().getAttribute("email")) == null ?
+                request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
         List<Answer> answers;
-        if(email==null) {
-            answers = this.answerService.searchAnswersByUser(username);
-        }
-        else{
-            answers = this.answerService.searchAnswersByUser(email);
-        }
+
+        answers = this.answerService.searchAnswersByUser(username);
+
 
         Set<Question> questions = answers.stream().map(Answer::getQuestion).collect(Collectors.toSet());
 
@@ -53,7 +50,7 @@ public class MyAnswersController {
 
     @PostMapping("/delete-answer/{answerId}/{questionId}")
     public String deleteAnswer(@PathVariable Long answerId,
-                               @PathVariable Long questionId){
+                               @PathVariable Long questionId) {
         answerService.delete(answerId);
         return "redirect:/myAnswers";
     }

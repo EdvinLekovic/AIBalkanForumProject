@@ -139,7 +139,8 @@
                                     </div>
                                 </div>
                                 <div class="text-muted small text-center align-self-center"
-                                     th:if="${(question.getUser().getUsername() == #request.getRemoteUser()) || (answer.getUser().getUsername() == #request.getRemoteUser())}">
+                                     th:if="${(question.getUser().getUsername() == #request.getRemoteUser()) || (answer.getUser().getUsername() == #request.getRemoteUser())
+                                     || question.getUser().getUsername() == #session.getAttribute('email') || answer.getUser().getUsername() == #session.getAttribute('email')  }">
                                     <form sec:authorize="isAuthenticated()"
                                           th:action="@{'/forum/delete-answer/{answerId}/{questionId}' (answerId=${answer.getId()},questionId=${question.getId()})}"
                                           th:method="POST" class="button-space">
@@ -165,7 +166,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form th:action="@{'/forum/addAnswer/{id}' (id=${question.getId()})}" method="POST">
-                        <input id="username" type="hidden" name="username" th:value="${#request.getRemoteUser()}">
+                        <input id="username" type="hidden" name="username" th:value="(${#session.getAttribute('email')} != null ? ${#session.getAttribute('email')} : ${#request.getRemoteUser()})">
                         <div class="modal-header d-flex align-items-center bg-secondary text-white">
                             <h6 class="modal-title mb-0" id="threadModalLabel">Answer question</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -175,11 +176,6 @@
                         <div class="modal-body">
                             <label for="questionText">Write your answer here</label>
                             <textarea class="form-control summernote" name="questionText" id="questionText"></textarea>
-
-                            <!--                            <div class="custom-file form-control-sm mt-3" style="max-width: 300px;">-->
-                            <!--                                <input type="file" class="custom-file-input" id="customFile" multiple=""/>-->
-                            <!--                                <label class="custom-file-label" for="customFile">Attachment</label>-->
-                            <!--                            </div>-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
