@@ -76,7 +76,8 @@ public class UserServiceImpl implements UserService {
         if (this.userRepository.findById(username).isPresent()) {
             throw new UsernameAlreadyExistsException(username);
         }
-        User user = new User(username, name);
+        String username1 = String.format("%s (%s)",username,provider);
+        User user = new User(username1, name);
         user.setRole(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode("123"));
         user.setProvider(provider);

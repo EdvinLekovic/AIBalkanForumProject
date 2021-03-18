@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -111,8 +113,12 @@ public class JobController {
                          @RequestParam String knowLedgeSkillsAndAbilities,
                          @RequestParam String educationAndExperience,
                          @RequestParam MultipartFile urlImage,
-                         @RequestParam Date datepicker) throws IOException {
+                         @RequestParam String datepicker) throws IOException, ParseException {
         Image image = null;
+        Date date = null;
+        if(datepicker!=null&&!datepicker.isEmpty()){
+            date = new SimpleDateFormat("MM/dd/yyyy").parse(datepicker);
+        }
         if(id!=null){
             if(urlImage.getOriginalFilename().isEmpty()) {
                 jobService.edit(id,
@@ -124,7 +130,7 @@ public class JobController {
                         educationAndExperience,
                         jobSalary,
                         jobLocationId,
-                        datepicker,
+                        date,
                         jobCategoryId,
                         null);
             }
@@ -140,7 +146,7 @@ public class JobController {
                         educationAndExperience,
                         jobSalary,
                         jobLocationId,
-                        datepicker,
+                        date,
                         jobCategoryId,
                         image);
                 imageService.delete(imageId);
@@ -157,7 +163,7 @@ public class JobController {
                     educationAndExperience,
                     jobSalary,
                     jobLocationId,
-                    datepicker,
+                    date,
                     jobCategoryId,
                     image);
         }

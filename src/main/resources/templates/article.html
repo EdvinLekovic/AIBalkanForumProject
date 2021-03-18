@@ -11,7 +11,7 @@
                         <br/>
                     </div>
                     <img th:src="@{'/myArticles/image/{id}' (id=${article.getId()})}"
-                        alt="" class=" center align-content-center">
+                        alt="" class="image-width center align-content-center">
                     <p class="text-black-50"><i>Research Description:<br/>
                         <th:block th:text="${article.getDescription()}"></th:block></i>
                     </p>

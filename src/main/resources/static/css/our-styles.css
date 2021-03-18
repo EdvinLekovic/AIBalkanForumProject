@@ -112,6 +112,11 @@ section.jumbotron.text-center {
     height: 42px;
 }
 
+.image-width {
+    width: 500px;
+    height: 300px;
+}
+
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 

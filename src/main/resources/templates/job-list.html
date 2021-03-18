@@ -133,9 +133,9 @@
                                 </div>
                             </div>
                             <div class="items-link items-link2 f-right">
-                                <a sec:authorize="isAuthenticated()" class="items-link-edit"
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" class="items-link-edit"
                                    th:href="@{'/jobs/{id}/edit' (id=${job.getId()})}">Edit</a>
-                                <a sec:authorize="isAuthenticated()" class="items-link-delete"
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" class="items-link-delete"
                                    th:href="@{'/jobs/{id}/delete' (id=${job.getId()})}">Delete</a>
                                 <span th:text="${job.getCategory()!=null} ? ${job.getCategory().getName()} : '' "></span>
                                 <span th:text="${job.getDateCreated().getDayOfMonth() + ' ' + job.getDateCreated().getMonth() + ' ' + job.getDateCreated().getYear()}">7 hours ago</span>

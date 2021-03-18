@@ -112,7 +112,12 @@ public class JobServiceImpl implements JobService {
         Company company = companyRepository.findById(companyId).orElseThrow(()->new InvalidCompanyNameException(companyId));
         Location location = locationRepository.findById(locationId).orElseThrow(()->new InvalidLocationIdException(locationId));
         Category category = categoryRepository.findById(categoryId).orElseThrow(()->new InvalidCategoryIdException(categoryId));
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(deadlineApply.toInstant(), ZoneId.systemDefault());
+
+        if(deadlineApply!=null) {
+            LocalDateTime localDateTime = LocalDateTime.ofInstant(deadlineApply.toInstant(), ZoneId.systemDefault());
+            job.setDeadlineApply(localDateTime);
+        }
+
         job.setCompany(company);
         job.setTitle(title);
         job.setJobType(jobType);
@@ -121,11 +126,12 @@ public class JobServiceImpl implements JobService {
         job.setExperience(experience);
         job.setSalary(salary);
         job.setLocation(location);
-        job.setDeadlineApply(localDateTime);
         job.setCategory(category);
+
         if(image!=null) {
             job.setImage(image);
         }
+
         return jobRepository.save(job);
     }
 
