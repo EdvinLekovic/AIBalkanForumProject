@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CompanyRepository extends JpaRepository<Company,String> {
+public interface CompanyRepository extends JpaRepository<Company, String> {
     List<Company> findAllByNameLike(String name);
 }

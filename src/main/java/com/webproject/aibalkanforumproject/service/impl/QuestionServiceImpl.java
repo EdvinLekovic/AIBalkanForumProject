@@ -32,21 +32,21 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question create(String title, String description,String username) {
-        if(title.isEmpty() || description.isEmpty()){
+    public Question create(String title, String description, String username) {
+        if (title.isEmpty() || description.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        User user = userRepository.findById(username).orElseThrow(()->new UsernameNotFoundException(username));
-        return questionRepository.save(new Question(title,description,user));
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        return questionRepository.save(new Question(title, description, user));
     }
 
     @Override
     public Question edit(Long id, String title, String description) {
         Question question = this.questionRepository.findById(id).orElseThrow(() -> new QuestionNotFoundException(id));
-        if(title!=null&&!title.isEmpty()) {
+        if (title != null && !title.isEmpty()) {
             question.setTitle(title);
         }
-        if(description!=null&&!description.isEmpty()) {
+        if (description != null && !description.isEmpty()) {
             question.setDescription(description);
         }
         return this.questionRepository.save(question);
@@ -82,7 +82,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Question searchQuestionById(Long id) {
-        return questionRepository.findById(id).orElseThrow(()->new QuestionNotFoundException(id));
+        return questionRepository.findById(id).orElseThrow(() -> new QuestionNotFoundException(id));
     }
 
     @Override
@@ -90,7 +90,12 @@ public class QuestionServiceImpl implements QuestionService {
         return questionRepository.findQuestionsByTitleLikeOrDescriptionLike(titleAndDesc);
     }
 
-    public Question searchQuestionByIdAndTitleAndDescriptionLike(Long id,String titleAndDesc){
-        return questionRepository.findQuestionByIdAndTitleAndDescriptionLike(id,titleAndDesc);
+    @Override
+    public List<Question> searchQuestionsByUsernameAndTitleAndDescriptionLike(String username, String titleAndDesc) {
+        return questionRepository.findQuestionsByUsernameAndTitleLikeOrDescriptionLike(username,titleAndDesc);
+    }
+
+    public Question searchQuestionByIdAndTitleAndDescriptionLike(Long id, String titleAndDesc) {
+        return questionRepository.findQuestionByIdAndTitleAndDescriptionLike(id, titleAndDesc);
     }
 }

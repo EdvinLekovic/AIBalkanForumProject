@@ -1,4 +1,4 @@
-package com.webproject.aibalkanforumproject.web;
+package com.webproject.aibalkanforumproject.web.rest;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
@@ -13,12 +13,12 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @RestController
-public class EventsController {
+public class EventsRestController {
 
 
     private final EventService eventService;
 
-    public EventsController(EventService eventService) {
+    public EventsRestController(EventService eventService) {
         this.eventService = eventService;
     }
 

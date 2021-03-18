@@ -28,7 +28,7 @@ public class ForumController {
     public String getForumPage(Model model,HttpServletRequest request){
         String titleAndDesc = (String) request.getSession().getAttribute("titleAndDesc");
         List<Question> questions;
-        if(titleAndDesc!=null){
+        if(titleAndDesc!=null && !titleAndDesc.isEmpty()){
             questions = questionService.searchQuestionsByTitleAndDescriptionLike(titleAndDesc);
         }
         else{
@@ -45,7 +45,7 @@ public class ForumController {
         String titleAndDesc = (String) request.getSession().getAttribute("titleAndDesc");
         Question question = questionService.searchQuestionById(id);
         List<Answer> answers;
-        if(titleAndDesc!=null){
+        if(titleAndDesc!=null && !titleAndDesc.isEmpty()){
             answers = answerService.
                     searchAnswersByQuestionAndDescriptionLike(question,titleAndDesc);
         }

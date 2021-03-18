@@ -39,7 +39,6 @@ public class MyAnswersController {
 
         answers = this.answerService.searchAnswersByUser(username);
 
-
         Set<Question> questions = answers.stream().map(Answer::getQuestion).collect(Collectors.toSet());
 
         model.addAttribute("questions", questions);
@@ -48,9 +47,8 @@ public class MyAnswersController {
         return "master-template";
     }
 
-    @PostMapping("/delete-answer/{answerId}/{questionId}")
-    public String deleteAnswer(@PathVariable Long answerId,
-                               @PathVariable Long questionId) {
+    @PostMapping("/delete-answer/{answerId}")
+    public String deleteAnswer(@PathVariable Long answerId) {
         answerService.delete(answerId);
         return "redirect:/myAnswers";
     }

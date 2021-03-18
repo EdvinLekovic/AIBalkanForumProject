@@ -107,7 +107,8 @@ public class MyArticlesController {
 
     @PostMapping("/{id}/delete")
     public String deleteArticle(@PathVariable Long id, HttpServletRequest request) {
-        String username = request.getRemoteUser();
+        String username = (request.getSession().getAttribute("email")) == null ?
+                request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
         this.favouriteService.delete(id, username);
         this.articleService.delete(id);
         return "redirect:/myArticles";

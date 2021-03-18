@@ -28,15 +28,13 @@ public class MyQuestionsController {
     public String getMyQuestionsPage(Model model, HttpServletRequest request) {
 
         String titleAndDesc = (String) request.getSession().getAttribute("titleAndDesc");
+        String username = (request.getSession().getAttribute("email")) == null ?
+                request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
         List<Question> questions;
-        if (titleAndDesc != null) {
-            questions = questionService.searchQuestionsByTitleAndDescriptionLike(titleAndDesc);
+        if (titleAndDesc != null && !titleAndDesc.isEmpty()) {
+            questions = questionService.searchQuestionsByUsernameAndTitleAndDescriptionLike(username,titleAndDesc);
         } else {
-            String username = (request.getSession().getAttribute("email")) == null ?
-                    request.getRemoteUser() : ((String) request.getSession().getAttribute("email"));
-
             questions = this.questionService.searchQuestionsByUser(username);
-
         }
         model.addAttribute("answerService", answerService);
         model.addAttribute("questions", questions);
@@ -49,7 +47,7 @@ public class MyQuestionsController {
         String titleAndDesc = (String) request.getSession().getAttribute("titleAndDesc");
         Question question = questionService.searchQuestionById(id);
         List<Answer> answers;
-        if (titleAndDesc != null) {
+        if (titleAndDesc != null && !titleAndDesc.isEmpty()) {
             answers = answerService.
                     searchAnswersByQuestionAndDescriptionLike(question, titleAndDesc);
         } else {

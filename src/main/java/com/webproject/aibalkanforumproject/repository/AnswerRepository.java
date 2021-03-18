@@ -13,11 +13,15 @@ import java.util.List;
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     List<Answer> findAllByDescriptionContaining(String keyWord);
+
     List<Answer> findAnswersByUser(User user);
+
     List<Answer> findAllByQuestion(Question question);
+
     List<Answer> findAnswersByDescriptionContains(String description);
+
     @Query(value = "SELECT * " +
             "FROM ANSWER a " +
-            "WHERE a.question_id = :questionId AND a.description ILIKE %:description%",nativeQuery = true)
-    List<Answer> findAnswersByQuestionAndDescriptionContains(Long questionId,String description);
+            "WHERE a.question_id = :questionId AND a.description ILIKE %:description%", nativeQuery = true)
+    List<Answer> findAnswersByQuestionAndDescriptionContains(Long questionId, String description);
 }

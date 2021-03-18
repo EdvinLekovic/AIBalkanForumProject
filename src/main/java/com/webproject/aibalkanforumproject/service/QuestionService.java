@@ -18,5 +18,6 @@ public interface QuestionService {
     List<Question> findAllQuestions();
     Question searchQuestionById(Long id);
     List<Question> searchQuestionsByTitleAndDescriptionLike(String titleAndDesc);
+    List<Question> searchQuestionsByUsernameAndTitleAndDescriptionLike(String username,String titleAndDesc);
     Question searchQuestionByIdAndTitleAndDescriptionLike(Long id,String titleAndDesc);
 }

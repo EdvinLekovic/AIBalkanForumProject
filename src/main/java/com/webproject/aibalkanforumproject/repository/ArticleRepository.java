@@ -10,9 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ArticleRepository extends JpaRepository<Article,Long> {
+public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findArticlesByUser(User user);
+
     List<Article> findArticlesByCategory(Category category);
+
     List<Article> findArticlesByTitleLike(String title);
+
     List<Article> findArticlesByTitle(String title);
 }
