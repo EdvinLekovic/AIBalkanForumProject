@@ -4,7 +4,7 @@
             <h3 class="jumbotron-heading">Answers you have given</h3>
         </div>
     </section>
-    <div class="container mb-4 center" th:if="${questions.size() > 0 and answers.size() > 0}" th:each="question : ${questions}">
+    <div class="container mb-4 center" th:if="${questionAnswerMap.size() > 0}" th:each="questionKey : ${questionKeySet}">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-2 forum-card border1">
@@ -12,13 +12,14 @@
                         <div class="media forum-item">
                             <div class="media-body ml-3">
                                     <small class="text-muted ml-2"
-                                           th:text="${question.getDateCreated().getDayOfMonth() + ' ' + question.getDateCreated().getMonth()
-                                            + ' ' + question.getDateCreated().getYear()}">1 hour ago</small>
-                                    <h5 class="mt-1" th:text="${question.getTitle()}">Realtime fetching data</h5>
+                                           th:text="${questionService.searchQuestionById(questionKey).getDateCreated().getDayOfMonth() + ' ' +
+                                           questionService.searchQuestionById(questionKey).getDateCreated().getMonth()
+                                            + ' ' + questionService.searchQuestionById(questionKey).getDateCreated().getYear()}">1 hour ago</small>
+                                    <h5 class="mt-1" th:text="${questionService.searchQuestionById(questionKey).getTitle()}">Realtime fetching data</h5>
                                     <div class="mt-3 font-size-sm">
-                                        <p th:text="${question.getDescription()}">Hellooo :)</p>
+                                        <p th:text="${questionService.searchQuestionById(questionKey).getDescription()}">Hellooo :)</p>
                                     </div>
-                                <div th:each="answer : ${answers}">
+                                <div th:each="answer : ${questionAnswerMap.get(questionKey)}">
                                     <div class="border1 text-center class2  text-light">
                                         My answer to the given question
                                         <div>

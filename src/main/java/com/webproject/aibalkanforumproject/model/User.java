@@ -41,10 +41,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Provider provider;
 
-    @OneToOne
-    private Favourite favourite;
-
-
     public User() {
     }
 

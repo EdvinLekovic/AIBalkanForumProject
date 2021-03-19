@@ -4,7 +4,7 @@ import com.webproject.aibalkanforumproject.model.Answer;
 import com.webproject.aibalkanforumproject.model.Question;
 
 import java.util.List;
-
+import java.util.Map;
 
 
 public interface AnswerService {
@@ -17,4 +17,5 @@ public interface AnswerService {
     List<Answer> searchAnswersByQuestion(Question question);
     List<Answer> searchAnswersByDescriptionLike(String description);
     List<Answer> searchAnswersByQuestionAndDescriptionLike(Question question,String description);
+    Map<Long,List<Answer>> searchAllUserAnswersPerQuestion(String username);
 }

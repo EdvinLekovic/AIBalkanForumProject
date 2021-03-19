@@ -114,4 +114,13 @@ public class MyQuestionsController {
         request.getSession().setAttribute("titleAndDesc", titleAndDesc);
         return "redirect:/myQuestions/info/" + id;
     }
+
+    @PostMapping("/addAnswer/{id}")
+    public String addAnswer(
+            @PathVariable Long id,
+            @RequestParam String questionText,
+            @RequestParam String username){
+        answerService.create(id,questionText,username);
+        return "redirect:/myQuestions/info/"+id;
+    }
 }

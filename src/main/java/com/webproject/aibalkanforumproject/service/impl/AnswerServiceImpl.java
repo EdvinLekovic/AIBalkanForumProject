@@ -14,9 +14,8 @@ import com.webproject.aibalkanforumproject.service.AnswerService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
@@ -34,9 +33,9 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public Answer create(Long questionId, String description, String username) {
-        Question question = questionRepository.findById(questionId).orElseThrow(()-> new QuestionNotFoundException(questionId));
-        User user = userRepository.findById(username).orElseThrow(()->new UsernameNotFoundException(username));
-        return answerRepository.save(new Answer(description,question,user));
+        Question question = questionRepository.findById(questionId).orElseThrow(() -> new QuestionNotFoundException(questionId));
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        return answerRepository.save(new Answer(description, question, user));
     }
 
     @Override
@@ -53,18 +52,13 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> searchAnswersByUser(String username) {
-
         User user = this.userRepository.findById(username).orElseThrow(() -> new UserNotExistException(username));
         return this.answerRepository.findAnswersByUser(user);
     }
 
     @Override
     public List<Answer> searchAllAnswersToQuestion(Long id) {
-
         Question question = this.questionRepository.findById(id).orElseThrow(() -> new QuestionNotFoundException(id));
-        if(question == null){
-            return Collections.emptyList();
-        }
         return this.answerRepository.findAllByQuestion(question);
     }
 
@@ -80,7 +74,17 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> searchAnswersByQuestionAndDescriptionLike(Question question, String description) {
-        return answerRepository.findAnswersByQuestionAndDescriptionContains(question.getId(),description);
+        return answerRepository.findAnswersByQuestionAndDescriptionContains(question.getId(), description);
+    }
+
+    @Override
+    public Map<Long, List<Answer>> searchAllUserAnswersPerQuestion(String username) {
+        List<Answer> answers = this.searchAnswersByUser(username);
+        return answers.stream()
+                .collect(Collectors.groupingBy(answer -> answer.getQuestion().getId(),
+                        TreeMap::new,
+                        Collectors.toList()));
+
     }
 
 
