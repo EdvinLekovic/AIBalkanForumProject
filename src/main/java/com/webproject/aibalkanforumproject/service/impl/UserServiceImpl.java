@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 
@@ -31,56 +32,50 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(String username, String name, String lastname, String password, String repeatPassword, Role role) {
 
-        if (username==null || username.isEmpty())
+        if (username == null || username.isEmpty())
             throw new InvalidUsernameException();
 
-        if (password==null || password.isEmpty())
+        if (password == null || password.isEmpty())
             throw new InvalidPasswordException();
 
-        if(this.userRepository.findById(username).isPresent()){
+        if (this.userRepository.findById(username).isPresent()) {
             throw new UsernameAlreadyExistsException(username);
         }
 
-        if(!password.equals(repeatPassword)){
+        if (!password.equals(repeatPassword)) {
             throw new PasswordsDoNotMatchException();
         }
 
-        return userRepository.save(new User(username,name,lastname,passwordEncoder.encode(password), role,Provider.LOCAL));
+        return userRepository.save(new User(username, name, lastname, passwordEncoder.encode(password), role, Provider.LOCAL));
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return this.userRepository.findById(s).orElseThrow(()->new UsernameNotFoundException(s));
+        return this.userRepository.findById(s).orElseThrow(() -> new UsernameNotFoundException(s));
     }
 
-    public Optional<User> findByUserName(String username){
+    public Optional<User> findByUserName(String username) {
         return this.userRepository.findById(username);
     }
 
     @Override
     public User registerWithGoogle(String username, String name) {
-        User user = getUser(username, name, Provider.GOOGLE);
-        return this.userRepository.save(user);
+        return getUser(username,name,Provider.GOOGLE);
     }
 
     @Override
     public User registerWithFacebook(String username, String name) {
-        User user = getUser(username, name, Provider.FACEBOOK);
-        return this.userRepository.save(user);
+       return getUser(username,name,Provider.FACEBOOK);
     }
 
     private User getUser(String username, String name, Provider provider) {
-        if (username == null || username.isEmpty())
-            throw new InvalidUsernameException();
-
-        if (this.userRepository.findById(username).isPresent()) {
-            throw new UsernameAlreadyExistsException(username);
+        if (this.userRepository.findById(username).isEmpty()) {
+            User user = new User(username, name);
+            user.setRole(Role.ROLE_USER);
+            user.setPassword(passwordEncoder.encode("123"));
+            user.setProvider(provider);
+            return this.userRepository.save(user);
         }
-        String username1 = String.format("%s (%s)",username,provider);
-        User user = new User(username1, name);
-        user.setRole(Role.ROLE_USER);
-        user.setPassword(passwordEncoder.encode("123"));
-        user.setProvider(provider);
-        return user;
+        return null;
     }
 }

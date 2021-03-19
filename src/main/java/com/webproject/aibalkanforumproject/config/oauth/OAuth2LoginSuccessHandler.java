@@ -1,5 +1,6 @@
 package com.webproject.aibalkanforumproject.config.oauth;
 
+import com.webproject.aibalkanforumproject.model.enumerations.Provider;
 import com.webproject.aibalkanforumproject.repository.UserRepository;
 import com.webproject.aibalkanforumproject.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -40,14 +41,19 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         String email = user.getEmail();
         String name = user.getName();
         request.getSession().setAttribute("name", name);
-        request.getSession().setAttribute("email", email);
-        if (this.userRepository.findById(email).isEmpty()) {
-            if (user.getAttributes().containsKey("sub")) {
-                this.userService.registerWithGoogle(email, name);
-            } else {
-                this.userService.registerWithFacebook(email, name);
-            }
+        Provider provider;
+        String email1;
+        if (user.getAttributes().containsKey("sub")) {
+            provider = Provider.GOOGLE;
+            email1 = String.format("%s (%s)", email, provider);
+            this.userService.registerWithGoogle(email1, name);
+        } else {
+            provider = Provider.FACEBOOK;
+            email1 = String.format("%s (%s)", email, provider);
+            this.userService.registerWithFacebook(email1, name);
         }
+
+        request.getSession().setAttribute("email", email1);
         response.sendRedirect("/home");
     }
 }

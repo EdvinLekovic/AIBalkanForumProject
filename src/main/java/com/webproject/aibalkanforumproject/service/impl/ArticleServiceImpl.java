@@ -8,12 +8,12 @@ import com.webproject.aibalkanforumproject.model.Category;
 import com.webproject.aibalkanforumproject.model.User;
 import com.webproject.aibalkanforumproject.repository.ArticleRepository;
 import com.webproject.aibalkanforumproject.repository.CategoryRepository;
+import com.webproject.aibalkanforumproject.repository.FavouriteRepository;
 import com.webproject.aibalkanforumproject.repository.UserRepository;
 import com.webproject.aibalkanforumproject.service.ArticleService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.webproject.aibalkanforumproject.service.FavouriteService;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,11 +23,13 @@ public class ArticleServiceImpl implements ArticleService {
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final FavouriteService favouriteService;
 
-    public ArticleServiceImpl(ArticleRepository articleRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
+    public ArticleServiceImpl(ArticleRepository articleRepository, UserRepository userRepository, CategoryRepository categoryRepository, FavouriteService favouriteService) {
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
+        this.favouriteService = favouriteService;
     }
 
     @Override
@@ -91,6 +93,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     public Article delete(Long id){
         Article article = articleRepository.findById(id).orElseThrow(()->new InvalidArticleIdException(id));
+        userRepository.findAll().forEach(user->favouriteService.delete(id,user.getUsername()));
         articleRepository.delete(article);
         return article;
     }
